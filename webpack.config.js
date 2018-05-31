@@ -20,7 +20,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.hbs$/, loader: 'handlebars'},
-      {test: /bootstrap.+\.(jsx|js)$/, loader: 'imports?jQuery=jquery,$=jquery,this=>window' },
+      {test: /bootstrap.+\.js$/, loader: 'imports?jQuery=jquery,$=jquery,this=>window' },
       {test: /\.js$/, loader: 'babel?presets[]=es2015', include: [path.resolve(__dirname, 'src')]},
       {test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')},
       {test: /\.(woff|woff2)$/, loader: "url?limit=10000&mimetype=application/font-woff" },
