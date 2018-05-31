@@ -1,4 +1,4 @@
-import Service from 'backbone.service';
+import Service from 'radio.service';
 import Collection from './collection';
 import CollectionView from './collection-view';
 
