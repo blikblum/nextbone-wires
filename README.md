@@ -17,6 +17,7 @@ This is a fork of [Marionette Wires](https://github.com/thejameskyle/marionette-
 * Code splitting of colors routes (open network tab of dev tools and go to colors section)
 * Remember last selected book
 * Colors pagination is implemented without destructive render
+* Live webserver for development (auto reload on source change)
  
  Check the [live version](https://blikblum.github.io/marionette-wires-revisited/dist/)
  
@@ -39,9 +40,14 @@ yarn
 npm install
 ```
 
+Develop
+```sh
+npm run dev
+```
+
 Build
 ```sh
-npm run build
+npm run prod
 ```
 
 Once that's done, open up dist/index.html in a browser using a static server.
