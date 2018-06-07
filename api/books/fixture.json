@@ -2,16 +2,16 @@
   {
     "id": 1,
     "title": "As I Lay Dying",
-    "author": "Jonathan Swift",
+    "author": "William Faulkner",
     "year": 1930,
     "description": "As I Lay Dying is a novel by American author William Faulkner. Faulkner said that he wrote the novel from midnight to 4:00 AM over the course of six weeks and that he did not change a word of it.[1] Faulkner wrote it while working at a power plant, published it in 1930, and described it as a \"tour de force.\" Faulkner's seventh novel, it is consistently ranked among the best novels of 20th-century literature.[2][3][4][5] The title derives from Book XI of Homer's The Odyssey, wherein Agamemnon speaks to Odysseus: \"As I lay dying, the woman with the dog's eyes would not close my eyes as I descended into Hades.\"",
-    "img": "http://upload.wikimedia.org/wikipedia/en/0/08/AsILayDying.jpg"
+    "img": "https://upload.wikimedia.org/wikipedia/commons/0/08/AsILayDying.jpg"
   },
   {
     "id": 2,
     "title": "Gulliver's Travels",
-    "author": "William Faulkner",
-    "year": 1930,
+    "author": "Jonathan Swift",
+    "year": 1726,
     "description": "Travels into Several Remote Nations of the World. In Four Parts. By Lemuel Gulliver, First a Surgeon, and then a Captain of Several Ships, better known simply as Gulliver's Travels (1726, amended 1735), is a novel by Irish writer and clergyman Jonathan Swift, that is both a satire on human nature and a parody of the \"travellers' tales\" literary sub-genre. It is Swift's best known full-length work, and a classic of English literature.",
     "img": "http://upload.wikimedia.org/wikipedia/commons/4/43/Gullivers_travels.jpg"
   },
