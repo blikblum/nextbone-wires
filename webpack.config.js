@@ -19,6 +19,15 @@ var plugins = [
   })
 ];
 
+var envPresetConfig = {
+  modules: false,
+  targets: {
+    browsers: [
+      'ie 11'  
+    ]
+  }
+};
+
 module.exports = function (env) {
 
   var isProd = env && env.production;
@@ -35,6 +44,25 @@ module.exports = function (env) {
     plugins: plugins,
     module: {
       rules: [
+        {
+          test: /\.(js|jsx)$/,
+          include: [path.resolve('src')],
+          use: [{
+            loader: 'babel-loader',
+            options: {
+              presets: [['env', envPresetConfig]],
+              plugins: [
+                'syntax-dynamic-import', 
+                ['transform-react-jsx', {pragma: 'h'}],
+                ['jsx-pragmatic', {
+                  module: 'snabbdom-pragma-lite',
+                  import: 'h',
+                  export: 'createElement'
+                }]
+              ]
+            }
+          }]
+        },
         { 
           test: /\.hbs$/, 
           loader: 'handlebars-loader' 
@@ -42,12 +70,7 @@ module.exports = function (env) {
         { 
           test: /bootstrap.+\.js$/, 
           loader: 'imports-loader?jQuery=jquery,$=jquery,this=>window' 
-        },
-        { 
-          test: /\.js$/, 
-          loader: 'babel-loader?presets[]=es2015', 
-          include: [path.resolve(__dirname, 'src')] 
-        },
+        },        
         { 
           test: /\.css$/,
           use: [
