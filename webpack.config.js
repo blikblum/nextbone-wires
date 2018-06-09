@@ -52,7 +52,7 @@ module.exports = function (env) {
             options: {
               presets: [['env', envPresetConfig]],
               plugins: [
-                'syntax-dynamic-import', 
+                'syntax-dynamic-import', 'transform-class-properties', 
                 ['transform-react-jsx', {pragma: 'h'}],
                 ['jsx-pragmatic', {
                   module: 'snabbdom-pragma-lite',
