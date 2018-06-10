@@ -7,7 +7,7 @@ import {RouterLink} from 'marionette.routing';
 export default View.extend({
   template: template,
   tagName: 'nav',
-  className: 'header navbar navbar-default navbar-fixed-top',
+  className: 'header navbar navbar-expand-md navbar-light bg-light fixed-top',
 
   behaviors: [RouterLink],
 

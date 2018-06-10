@@ -1,3 +1,6 @@
+$padding-large-vertical:  10px;
+$padding-large-horizontal: 16px;
+
 .books {
   &__loading {
     display: table;
@@ -16,25 +19,25 @@
   }
 
   &__title {
-    @media (min-width: @screen-md-min) {
+    @include media-breakpoint-up(md) {
       float: left;
     }
   }
 
   &__image {
-    @media (max-width: @screen-md-min) {
+    @include media-breakpoint-down(md) {
       width: 100%;
-      padding: @padding-large-vertical @padding-large-horizontal;
-      margin: @padding-large-vertical 0;
-      background: @gray-lighter;
+      padding: $padding-large-vertical $padding-large-horizontal;
+      margin: $padding-large-vertical 0;
+      background: $gray-400;
       text-align: center;
-      border-radius: @border-radius-large;
+      border-radius: $btn-border-radius-lg;
     }
 
-    @media (min-width: @screen-md-min) {
+    @include media-breakpoint-up(md) {
       float: right;
-      margin-left: @padding-large-horizontal;
-      margin-bottom: @padding-large-horizontal;
+      margin-left: $padding-large-horizontal;
+      margin-bottom: $padding-large-horizontal;
     }
 
     img {

@@ -7,7 +7,7 @@ export default View.extend({
 
   attributes() {
     return {
-      class : `list-group-item`,
+      class : `list-group-item list-group-item-action flex-column`,
       route : `books.show`,
       'param-bookid': `${this.model.get('id')}`
     };

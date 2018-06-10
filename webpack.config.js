@@ -69,7 +69,7 @@ module.exports = function (env) {
         },
         { 
           test: /bootstrap.+\.js$/, 
-          loader: 'imports-loader?jQuery=jquery,$=jquery,this=>window' 
+          loader: 'imports-loader?jQuery=jquery,$=jquery,Popper=popper.js,this=>window' 
         },        
         { 
           test: /\.css$/,
@@ -79,8 +79,8 @@ module.exports = function (env) {
           ]
         }, 
         { 
-          test: /\.less$/,
-          use: [MiniCSSExtractPlugin.loader, 'css-loader', 'less-loader']
+          test: /\.(sass|scss)$/,
+          use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader']
         },
         { 
           test: /\.(woff|woff2)$/, 

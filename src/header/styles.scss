@@ -1,14 +1,17 @@
 .header {
+  padding: 0;
+  
   .navbar-brand {
-    height: @navbar-height + 1;
+    height: 51px;
     margin-bottom: -1px;
     font-weight: 500;
+    padding: 10px;
 
     &,
     &:hover,
     &:active,
     &:focus {
-      background-color: @brand-danger;
+      background-color: theme-color("danger");
       color: white;
     }
 
@@ -22,10 +25,10 @@
     &:hover,
     &:focus {
       background-color: transparent;
-      color: @brand-danger;
-      border-bottom: 3px solid @brand-danger;
+      color: theme-color("danger");
+      border-bottom: 3px solid theme-color("danger");
       margin-bottom: -1px;
-      padding-bottom: @navbar-padding-vertical - 2px;
+      padding-bottom: 13px;
     }
   }
 }

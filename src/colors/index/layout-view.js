@@ -6,10 +6,15 @@ import renderer from '../../snabbdom-renderer';
 
 const ColorItem = (model) => {
   const {id, hex, name} = model.attributes;
-  return (<a className="colors__item list-group-item" href={`#colors/${id}`}>
-    <span className="colors__swatch" style={{'background-color': hex}}></span>
-    <h4 className="list-group-item-heading">{name}</h4>
-    <p className="list-group-item-text">{hex}</p>
+
+  return (<a className="colors__item list-group-item list-group-item-action flex-column align-items-start" href={`#colors/${id}`}>
+    <div className="d-flex w-100 justify-content-start">
+      <span className="colors__swatch mt-2" style={{'background-color': hex}}></span>
+      <div>
+        <h5>{name}</h5>
+        <p className="mb-1">{hex}</p>
+      </div>
+    </div>
   </a>)
 }
 
@@ -43,7 +48,7 @@ export default View.extend({
   
     return (<div className="colors colors--index container">
       <div className="page-header">
-        <a href="#colors/new" className="btn btn-primary pull-right">Create</a>
+        <a href="#colors/new" className="btn btn-primary float-right mt-2">Create</a>
         <h1>Colors: Index</h1>
       </div>
 
@@ -53,7 +58,7 @@ export default View.extend({
         </div>
       </div>
 
-      <div className="colors__footer">
+      <div className="colors__footer mt-3 d-flex justify-content-center">
         <paging-bar count={this.collection.length} start={this.state.start} limit={this.state.limit}/> 
       </div>
     </div>)
