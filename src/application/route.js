@@ -5,5 +5,10 @@ export default Route.extend({
     colors: function () {
       return import('../colors/route');
     }
+  },
+
+  renderView(region, view) {
+    console.log('app - renderView')
+    Route.prototype.renderView.call(region, view);
   }
 });
