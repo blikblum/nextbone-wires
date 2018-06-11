@@ -1,8 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
-@import "~nprogress/nprogress.css";
+@import "~nprogress/nprogress";
 
 @import "application/styles";
 @import "books/styles";
+@import "books/flip-animation";
 @import "colors/styles";
 @import "flashes/styles";
 @import "header/styles";
@@ -15,3 +16,4 @@ body,
   height: 100%;
   width: 100%;
 }
+

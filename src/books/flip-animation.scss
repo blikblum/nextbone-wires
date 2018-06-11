@@ -1,0 +1,30 @@
+.flip-scene {
+  perspective: 600px;
+}
+
+.flip-card {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card__face--front {
+  
+}
+
+.flip-card__face--back {
+  transform: rotateY(180deg);
+}
