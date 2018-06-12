@@ -6,8 +6,7 @@ import storage from '../storage';
 import Radio from 'backbone.radio';
 
 export default View.extend({
-  template: template,
-  className: 'colors colors--create container',
+  template: template,  
 
   behaviors: {
     form: { behaviorClass: FormBehavior }

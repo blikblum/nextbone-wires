@@ -7,7 +7,6 @@ import Radio from 'backbone.radio';
 
 export default View.extend({
   template: template,
-  className: 'colors colors--show container',
 
   initialize(options = {}) {
     this.model = options.model;
