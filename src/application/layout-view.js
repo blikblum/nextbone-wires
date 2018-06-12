@@ -13,7 +13,9 @@ class PageTransitionRegion extends Region {
     this.$el.append(view.el);
     view.$el.addClass("pt-page pt-page-current");
     if (hasAnimation && this.isSwappingView()) {
+      this.$el.css('overflow', 'hidden');
       view.$el.addClass(this.animation.inClass).one("animationend", () => {
+        this.$el.css('overflow', '');
         view.$el.removeClass(this.animation.inClass);
         view.triggerMethod('page:transition:end');
       });
@@ -26,7 +28,9 @@ class PageTransitionRegion extends Region {
     var hasAnimation = !!this.animation && !!this.animation.outClass;
 
     if (hasAnimation && this.isSwappingView()) {
-      view.$el.addClass(this.animation.outClass).one("animationend", () => {        
+      this.$el.css('overflow', 'hidden');
+      view.$el.addClass(this.animation.outClass).one("animationend", () => { 
+        this.$el.css('overflow', '');
         view.destroy();
       });
     } else {
