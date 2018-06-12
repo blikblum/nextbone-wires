@@ -1,10 +1,14 @@
 import Service from 'radio.service';
 import {Collection} from 'backbone';
+import {Region} from 'backbone.marionette';
 import View from './view';
 
 const HeaderService = Service.extend({
   setup(options = {}) {
     this.container = options.container;
+    if (!this.container) {
+      this.container = new Region({el: options.el});
+    }
   },
 
   start() {
@@ -17,6 +21,7 @@ const HeaderService = Service.extend({
     add: 'add',
     remove: 'remove',
     activate: 'activate',
+    getItems: 'getItems'
   },
 
   add(model) {
@@ -34,6 +39,10 @@ const HeaderService = Service.extend({
     if (model) {
       model.set('active', true);
     }
+  },
+
+  getItems() {
+    return this.collection;
   }
 });
 

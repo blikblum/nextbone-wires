@@ -1,10 +1,14 @@
 import Service from 'radio.service';
 import Collection from './collection';
 import CollectionView from './collection-view';
+import {Region} from 'backbone.marionette';
 
 const FlashesService = Service.extend({
   setup(options = {}) {
     this.container = options.container;
+    if (!this.container) {
+      this.container = new Region({el: options.el});
+    }    
   },
 
   start() {

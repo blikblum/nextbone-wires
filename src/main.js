@@ -1,6 +1,5 @@
 import './plugins';
 import $ from 'jquery';
-import Radio from 'backbone.radio';
 import {createRouter, middleware} from 'marionette.routing';
 
 import Application from './application/application';
@@ -21,15 +20,15 @@ import './main.scss';
 let app = new Application();
 
 ModalService.setup({
-  container: app.layout.getRegion('overlay')
+  el: '.application__overlay'
 });
 
 HeaderService.setup({
-  container: app.layout.getRegion('header')
+  el: '.application__header'
 });
 
 FlashesService.setup({
-  container: app.layout.getRegion('flashes')
+  el: '.application__flashes'
 });
 
 $(document).ajaxError(() => {
@@ -40,8 +39,6 @@ $(document).ajaxError(() => {
 });
 
 let router = createRouter({log: true, logError: true});
-
-router.rootRegion = app.layout.getRegion('content');
 
 router.map(function (route) {
   route('app', {path: '/', routeClass: ApplicationRoute, abstract: true}, function () {
