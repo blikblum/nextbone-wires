@@ -29,8 +29,7 @@ const FlipRegion = Region.extend({
 
 
 export default View.extend({
-  template: template,
-  className: 'container',
+  template: template,  
   regions: {
     library: '.books__library',
     outlet: {

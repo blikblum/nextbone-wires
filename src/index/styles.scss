@@ -12,13 +12,14 @@
     color: color("gray");
 
     h1 {
-      color: theme-color("danger");
-      -webkit-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-fill-mode: both;
-      animation-fill-mode: both;
-      -webkit-animation-name: slideInDown;
-      animation-name: slideInDown;
+
+      color: theme-color("danger");      
+
+      &.shown {        
+        animation-duration: 1s;        
+        animation-fill-mode: both;        
+        animation-name: slideInDown;
+      }            
 
       span {
         color: white;
@@ -40,16 +41,15 @@
     }
 
     p {
-      -webkit-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-fill-mode: both;
-      animation-fill-mode: both;
-      -webkit-animation-name: fadeIn;
-      animation-name: fadeIn;
-      animation-delay: 1s;
       font-weight: 200;
-      font-size: ($font-size-base * 1.4);
-    }
+      font-size: ($font-size-base * 1.4);      
+      &.shown {               
+        animation-duration: 1s;      
+        animation-fill-mode: both;      
+        animation-name: fadeIn;
+        animation-delay: 1s;
+      }
+    }    
 
     a {
       color: theme-color("danger");

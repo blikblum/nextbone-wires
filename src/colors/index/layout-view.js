@@ -41,8 +41,6 @@ export default View.extend({
     this.filteredCollection.reset(filtered);    
   },
 
-  outerRender: true,
-
   template() {
     const filtered = this.filteredCollection;
   

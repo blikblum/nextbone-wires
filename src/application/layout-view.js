@@ -12,17 +12,23 @@ class PageTransitionRegion extends Region {
     var hasAnimation = !!this.animation && !!this.animation.inClass;
 
     this.$el.append(view.el);
-    view.$el.addClass("pt-page-current");
-    if (hasAnimation) {
+    view.$el.addClass("pt-page pt-page-current");
+    if (hasAnimation && this.isSwappingView()) {
       view.$el.addClass(this.animation.inClass);
+    } 
+    if (!this.isSwappingView()) {
+      view.triggerMethod('page:transition:end');
     }
   }
 
   removeView(view) {
     var hasAnimation = !!this.animation && !!this.animation.outClass;
 
-    if (hasAnimation) {
+    if (hasAnimation && this.isSwappingView()) {
       view.$el.addClass(this.animation.outClass).one("animationend", () => {
+        if (this.currentView) {
+          this.currentView.triggerMethod('page:transition:end');
+        }
         view.destroy();
       });
     } else {
