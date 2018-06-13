@@ -6,6 +6,11 @@ import template from './paging-bar.hbs';
 class PagingBar extends Component {
   template = template
 
+  // disable shadow dom
+  static get renderRoot () {
+    return this;
+  }
+
   static get props() {
     return {
       count: props.number,
