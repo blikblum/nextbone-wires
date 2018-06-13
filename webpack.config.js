@@ -66,11 +66,7 @@ module.exports = function (env) {
         { 
           test: /\.hbs$/, 
           loader: 'handlebars-loader' 
-        },
-        { 
-          test: /bootstrap.+\.js$/, 
-          loader: 'imports-loader?jQuery=jquery,$=jquery,Popper=popper.js,this=>window' 
-        },        
+        },     
         { 
           test: /\.css$/,
           use: [
