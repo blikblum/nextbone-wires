@@ -1,5 +1,6 @@
 import './plugins';
 import $ from 'jquery';
+import Radio from 'backbone.radio';
 import {createRouter, middleware} from 'marionette.routing';
 
 import Application from './application/application';
@@ -68,6 +69,15 @@ HeaderService.request('add', {
   path: 'books',
   type: 'primary'
 });
+
+Radio.channel('router').on('route:render', route => {
+  if (route instanceof ApplicationRoute) {
+    // setup root view for inspector
+    if (window.__agent) {
+      app.layout = route.view;
+    }
+  }
+})
 
 router.use(middleware);
 
