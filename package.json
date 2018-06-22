@@ -4,7 +4,7 @@
   "description": "Starter kit for Marionette.js Applications using webpack",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-serve --mode=development",
+    "dev": "webpack-serve",
     "prod": "webpack --mode=production --env.production"
   },
   "repository": "https://github.com/blikblum/marionette-wires-revisited.git",

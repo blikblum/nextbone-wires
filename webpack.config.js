@@ -41,6 +41,7 @@ module.exports = function (env) {
       filename: "bundle.js"
     },
     devtool: "source-map",
+    mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
     plugins: plugins,
     module: {
       rules: [
