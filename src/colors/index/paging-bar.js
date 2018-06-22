@@ -7,7 +7,7 @@ class PagingBar extends Component {
   template = template
 
   // disable shadow dom
-  static get renderRoot () {
+  get renderRoot () {
     return this;
   }
 
