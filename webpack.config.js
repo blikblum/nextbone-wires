@@ -30,7 +30,7 @@ var envPresetConfig = {
 
 module.exports = function (env) {
 
-  var isProd = env && env.production;
+  var isProd = env.mode === 'production';
 
   if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']));
 
@@ -41,7 +41,7 @@ module.exports = function (env) {
       filename: "bundle.js"
     },
     devtool: "source-map",
-    mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
+    mode: isProd ? 'production' : 'development',
     plugins: plugins,
     module: {
       rules: [
