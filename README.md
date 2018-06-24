@@ -7,7 +7,7 @@ An opinionated example application built with Marionette.js.
 
 This is a fork of [Marionette Wires](https://github.com/thejameskyle/marionette-wires), with the following differences:
 
-* Use [Marionette](http://marionettejs.com/) v3 instead of v2
+* Use [Marionette](http://marionettejs.com/) v4 instead of v2
 * Use [marionette.routing](https://github.com/blikblum/marionette.routing) instead of [backbone.routing](https://github.com/thejameskyle/backbone-routing)
 * Use [webpack](http://webpack.github.io/) instead of browserify and gulp
 * No server, just client side
@@ -16,11 +16,15 @@ This is a fork of [Marionette Wires](https://github.com/thejameskyle/marionette-
 
 * Code splitting of colors routes (open network tab of dev tools and go to colors section)
 * Remember last selected book
-* Colors pagination is implemented without destructive render
 * Live webserver for development (auto reload on source change)
+* Animated page transitions (determined dynamically)
+* Animated book selection change
+* Colors list implemented with [snabbdom](https://github.com/snabbdom/snabbdom) / [JSX](https://github.com/Swizz/snabbdom-pragma)
+* Pagination implemented as a web component (using [skatejs](https://github.com/skatejs/skatejs/))
  
  Check the [live version](https://blikblum.github.io/marionette-wires-revisited/dist/)
  
+ Scaffold a new project with similar setup using [generator-mn](https://github.com/blikblum/generator-mn)
 
 ## Quick start
 
@@ -67,4 +71,4 @@ As a general rule, be sure to read through all of the source code yourself and m
 
 &copy; 2014 James Kyle. Distributed under [ISC license](LICENSE.md).
 
-&copy; 2016 Marionette v3 port + new features by Luiz Américo
+&copy; 2018 Marionette v3/v4 port + new features by Luiz Américo
