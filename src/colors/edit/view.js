@@ -4,6 +4,8 @@ import {View} from 'backbone.marionette';
 import template from './template.hbs';
 import storage from '../storage';
 import Radio from 'backbone.radio';
+import _ from 'underscore';
+import Syphon from 'backbone.syphon';
 
 export default View.extend({
   template: template,
@@ -35,5 +37,9 @@ export default View.extend({
         Radio.channel('router').request('transitionTo', 'colors.show', {colorid: this.model.id});
       });
     }
+  },
+
+  hasUnsavedChanges() {
+    return !_.isEqual(Syphon.serialize(this), _.omit(this.model.attributes, 'id', 'active'))
   }
 });
