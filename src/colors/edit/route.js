@@ -1,6 +1,6 @@
 import {Route} from 'marionette.routing';
 import View from './view';
-import FlashesService from '../../flashes/service';
+import ModalService from '../../modal/service';
 
 export default Route.extend({
 
@@ -14,13 +14,16 @@ export default Route.extend({
 
   deactivate(transition) {
     if (this.view.hasUnsavedChanges()) {
-      FlashesService.request('add', {
-        timeout : 5000,
-        type    : 'info',
-        title   : `View change not allowed`,
-        body    : `You have unsaved changes.`
-      });
-      transition.cancel()
+      return ModalService.request('confirm', {
+        title : 'You have unsaved changes',
+        text  : `Are you sure you want to exit without saving?`,
+        yes: 'Yes, discard changes',
+        no: 'No, abort exit'
+      }).then(confirmed => {
+        if (!confirmed) {
+          transition.cancel();
+        }          
+      });            
     }
   }
 });

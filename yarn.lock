@@ -1485,7 +1485,7 @@ chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.3.2, chalk@^2.4
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-cherrytreex@^3.0.4:
+cherrytreex@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/cherrytreex/-/cherrytreex-3.1.0.tgz#c184cb52fa2fd9253edc115a6f03255da3c86d0c"
   integrity sha512-CZGiemMDn5e+hBhtDrBxXc/JqZnECPt6I+nWYH4hHCm1/13zQ5KsXH2oFw+noxhGNtzDFeLgURcrdnebkW3aYA==
@@ -4079,12 +4079,12 @@ marionette.renderers@^0.5.1:
   resolved "https://registry.yarnpkg.com/marionette.renderers/-/marionette.renderers-0.5.1.tgz#7e165028ec28ac32cf5fd97a7035f49c29b5de8e"
   integrity sha512-CQ2MG0dQVQO0jhLu8xzQGLiAXrz7cK0QfsLjbqBfTfmTtj8sGUzPaQ36/W3iAWvAy2GrFdNraDMn+WC0N1TVoA==
 
-marionette.routing@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/marionette.routing/-/marionette.routing-0.9.1.tgz#ce6233e9485463e44e07366e664b81d671763308"
-  integrity sha512-Ad9XWxz1hAcdZp3nSfw5PteZiHuFS8CmfBWDP+mjWtN3ByWMGfQpzNCY2zfzkeN+ZJ747JjERSLIZtHIKVdO6g==
+marionette.routing@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/marionette.routing/-/marionette.routing-0.10.0.tgz#8408a6571cbcdab41ed3ea05e7f64ca2f0560e1e"
+  integrity sha512-Fw3w1kN0ioUhAdl/+l8vgVC1QYMBLhLV3Yf86/XdcLL5EAyejPi+Mz1hiE1hYDHbkdEEJeGSPKDuOoRa6y+lEA==
   dependencies:
-    cherrytreex "^3.0.4"
+    cherrytreex "^3.1.0"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.14"
