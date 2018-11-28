@@ -174,10 +174,10 @@
     "@webassemblyjs/wast-parser" "1.5.12"
     long "^3.2.0"
 
-"@webcomponents/webcomponentsjs@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@webcomponents/webcomponentsjs/-/webcomponentsjs-2.2.0.tgz#52f3415a259ef3abc2599ee7520d151bee6037a1"
-  integrity sha512-WYW4VT4lk0Qk6apSS/mU/wRh4CP+DxJ7FeU1pxmXIdon64+GMMSx6llVyW3jLD4cTwENu2sN23+iIxoRJwTtsw==
+"@webcomponents/webcomponentsjs@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@webcomponents/webcomponentsjs/-/webcomponentsjs-2.2.1.tgz#bf28cdad466aaf85d88ee56aebed32c83f4c1328"
+  integrity sha512-lZZ+Lkke6JhsJcQQqSVk1Pny6/8y4qhJ98LO7a/MwBSRO8WqHqK1X2vscfeL8vOnYGFnmBUyVG95lwYv/AXyLQ==
 
 "@webpack-contrib/config-loader@^1.0.0", "@webpack-contrib/config-loader@^1.1.1":
   version "1.1.3"
@@ -282,10 +282,10 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-animate.css@^3.5.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-3.5.2.tgz#91e668dc069a808e5e499514867b97aae0166c36"
-  integrity sha1-keZo3AaagI5eSZUUhnuXquAWbDY=
+animate.css@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/animate.css/-/animate.css-3.7.0.tgz#5de25d1ee5fba11ba6a1e2c4fa568f512eb7d4da"
+  integrity sha512-u3iMXDJr0cxMdQocIciDiou9Au4L5f9uT+/jCtprw3s1j3HcfCuI+khF+90Ps2KdsEhM2soF7SXB4WUvI3HlXg==
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -1485,10 +1485,10 @@ chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.3.2, chalk@^2.4
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-cherrytreex@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/cherrytreex/-/cherrytreex-3.1.0.tgz#c184cb52fa2fd9253edc115a6f03255da3c86d0c"
-  integrity sha512-CZGiemMDn5e+hBhtDrBxXc/JqZnECPt6I+nWYH4hHCm1/13zQ5KsXH2oFw+noxhGNtzDFeLgURcrdnebkW3aYA==
+cherrytreex@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/cherrytreex/-/cherrytreex-3.2.0.tgz#099e1f062f47305f657b5b21ace6a2a14371f537"
+  integrity sha512-rVpNizFiRv1B8IJeqevFmbh5KPzTc4Z0YlaV9pZz/6k5gBKqnsUGtLEp8P/ZHc7+o8nNGpjhCsOc9yDGHp8gXw==
   dependencies:
     path-to-regexp "^2.1.0"
 
@@ -4079,12 +4079,12 @@ marionette.renderers@^0.5.1:
   resolved "https://registry.yarnpkg.com/marionette.renderers/-/marionette.renderers-0.5.1.tgz#7e165028ec28ac32cf5fd97a7035f49c29b5de8e"
   integrity sha512-CQ2MG0dQVQO0jhLu8xzQGLiAXrz7cK0QfsLjbqBfTfmTtj8sGUzPaQ36/W3iAWvAy2GrFdNraDMn+WC0N1TVoA==
 
-marionette.routing@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/marionette.routing/-/marionette.routing-0.10.0.tgz#8408a6571cbcdab41ed3ea05e7f64ca2f0560e1e"
-  integrity sha512-Fw3w1kN0ioUhAdl/+l8vgVC1QYMBLhLV3Yf86/XdcLL5EAyejPi+Mz1hiE1hYDHbkdEEJeGSPKDuOoRa6y+lEA==
+marionette.routing@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/marionette.routing/-/marionette.routing-0.10.1.tgz#13dbcb894d4ca5f2d1593ca21d62bdc2e474de33"
+  integrity sha512-qAQpVFJ3T3tEmxgOCPgo19MLTQ2tPrRJV+OgpAZ5Y/exHH7TMCYOZfdHHk7lc/ZUnSr/rilccOIGx7a9eIZG7w==
   dependencies:
-    cherrytreex "^3.1.0"
+    cherrytreex "^3.2.0"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.14"
@@ -4999,10 +4999,10 @@ plur@^3.0.0:
   dependencies:
     irregular-plurals "^2.0.0"
 
-popper.js@^1.14.5:
-  version "1.14.5"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.5.tgz#98abcce7c7c34c4ee47fcbc6b3da8af2c0a127bc"
-  integrity sha512-fs4Sd8bZLgEzrk8aS7Em1qh+wcawtE87kRUJQhK6+LndyV1HerX7+LURzAylVaTyWIn5NTB/lyjnWqw/AZ6Yrw==
+popper.js@^1.14.6:
+  version "1.14.6"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.6.tgz#ab20dd4edf9288b8b3b6531c47c361107b60b4b0"
+  integrity sha512-AGwHGQBKumlk/MDfrSOf0JHhJCImdDMcGNoqKmKkU+68GFazv3CQ6q9r7Ja1sKDZmYWTckY/uLyEznheTDycnA==
 
 posix-character-classes@^0.1.0:
   version "0.1.1"

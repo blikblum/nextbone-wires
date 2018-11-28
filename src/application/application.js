@@ -17,20 +17,18 @@ export default Application.extend({
     this.listenTo(routerChannel, {
       'before:transition' : this.onBeforeTransition,
       'transition'        : this.onTransition,
-      'transition:error'  : this.onErrorRoute
+      'transition:abort'  : this.onTransitionAbort
     });
   },
 
   onBeforeTransition() {
     this.transitioning = true;
-    // Don't show for synchronous route changes
-    // since marionette.routing transitions are async, all will start the progress bar
-    // todo: configure for a sane default
-    _.defer(() => {
+    // Don't show for synchronous route changes takin more than 50ms    
+    _.delay(() => {
       if (this.transitioning) {
         nprogress.start();
       }
-    });
+    }, 50);
   },
 
   onTransition() {
@@ -39,7 +37,7 @@ export default Application.extend({
     nprogress.done();
   },
 
-  onErrorRoute() {
+  onTransitionAbort() {
     this.transitioning = false;
     nprogress.done(true);
   }
