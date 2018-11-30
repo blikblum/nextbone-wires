@@ -28,7 +28,7 @@
     "jquery": "^3.1.1",
     "marionette.modalservice": "^0.7.0",
     "marionette.renderers": "^0.5.1",
-    "marionette.routing": "^0.10.1",
+    "marionette.routing": "^0.12.0",
     "nprogress": "^0.2.0",
     "popper.js": "^1.14.6",
     "radio.service": "^0.6.0",

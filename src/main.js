@@ -1,7 +1,7 @@
 import './plugins';
 import $ from 'jquery';
 import Radio from 'backbone.radio';
-import {createRouter, middleware} from 'marionette.routing';
+import {Router} from 'marionette.routing';
 
 import Application from './application/application';
 import ApplicationRoute from './application/route';
@@ -39,12 +39,16 @@ $(document).ajaxError(() => {
   });
 });
 
-let router = createRouter({log: true, logError: true});
+let router = new Router({log: true, logError: true});
+
+function ColorsRoute () {
+  return import('./colors/route');
+}
 
 router.map(function (route) {
   route('app', {path: '/', routeClass: ApplicationRoute, abstract: true}, function () {
     route('index', {path: '', routeClass: IndexRoute});
-    route('colors', {path: 'colors', abstract: true}, function () {
+    route('colors', {path: 'colors', routeClass: ColorsRoute, abstract: true}, function () {
       route('colors.index', {path: ''});
       route('colors.create', {path: 'new'});
       route('colors.show', {path: ':colorid', outlet: false}, function () {
@@ -78,8 +82,6 @@ Radio.channel('router').on('route:render', route => {
     }
   }
 })
-
-router.use(middleware);
 
 router.listen();
 

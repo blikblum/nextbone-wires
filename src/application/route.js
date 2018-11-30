@@ -15,12 +15,6 @@ function getTransitionTarget(routes) {
 export default Route.extend({
   viewClass: LayoutView,
 
-  childRoutes: {
-    colors: function () {
-      return import('../colors/route');
-    }
-  },
-
   activate () {
     return HeaderService.request('getItems').then(items => {
       this.headerItems = items;
