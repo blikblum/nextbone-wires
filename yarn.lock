@@ -3990,10 +3990,10 @@ marionette.renderers@^0.5.1:
   resolved "https://registry.yarnpkg.com/marionette.renderers/-/marionette.renderers-0.5.1.tgz#7e165028ec28ac32cf5fd97a7035f49c29b5de8e"
   integrity sha512-CQ2MG0dQVQO0jhLu8xzQGLiAXrz7cK0QfsLjbqBfTfmTtj8sGUzPaQ36/W3iAWvAy2GrFdNraDMn+WC0N1TVoA==
 
-marionette.routing@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/marionette.routing/-/marionette.routing-0.12.0.tgz#0380a2dc3cb423da2ebcd4206b7a6dddfedab245"
-  integrity sha512-mIC5CicunGqMVlEFGjD+RBU4bQkPexwnEebHja41/SnMtLyGNGzr0o3kaUvVWxCHSxOZp6UL73CIwyateGlOAw==
+marionette.routing@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/marionette.routing/-/marionette.routing-1.0.0.tgz#204a60fb3ac73f4224604d4d12a8b6ab16e150d5"
+  integrity sha512-3SShreiMfakgNNiiCn7nHvsP0bAF+/KtJnU9pTvVU+KV3q/OlBVUrwRepm+zDFyHC0cIDoj2qurAWIgbjBDS4Q==
   dependencies:
     cherrytreex "^3.2.0"
 
