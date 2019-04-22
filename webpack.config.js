@@ -19,15 +19,6 @@ var plugins = [
   })
 ];
 
-var envPresetConfig = {
-  modules: false,
-  targets: {
-    browsers: [
-      'ie 11'  
-    ]
-  }
-};
-
 module.exports = function (env) {
 
   var isProd = env.mode === 'production';
@@ -43,30 +34,17 @@ module.exports = function (env) {
     devtool: "source-map",
     mode: isProd ? 'production' : 'development',
     plugins: plugins,
+    resolve: {
+      modules: [path.resolve(__dirname, './src/common'), 'node_modules']
+    },
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js)$/,
           include: [path.resolve('src')],
           use: [{
             loader: 'babel-loader',
-            options: {
-              presets: [['env', envPresetConfig]],
-              plugins: [
-                'syntax-dynamic-import', 'transform-class-properties', 
-                ['transform-react-jsx', {pragma: 'h'}],
-                ['jsx-pragmatic', {
-                  module: 'snabbdom-pragma-lite',
-                  import: 'h',
-                  export: 'createElement'
-                }]
-              ]
-            }
           }]
-        },
-        { 
-          test: /\.hbs$/, 
-          loader: 'handlebars-loader' 
         },     
         { 
           test: /\.css$/,

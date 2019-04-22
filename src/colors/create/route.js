@@ -1,17 +1,17 @@
-import {Route} from 'marionette.routing';
+import {Route} from "nextbone-routing";
 import Model from '../model';
-import View from './view';
+import View from './book-create-view';
 import storage from '../storage';
 
-export default Route.extend({
+export default class extends Route {
   activate() {
     this.model = new Model();
     return storage.findAll({ajaxSync: true}).then(collection => {
       this.collection = collection;
     });
-  },
+  }
 
-  viewClass: View,
+  static component = View;
 
   viewOptions() {
     return {
@@ -19,4 +19,4 @@ export default Route.extend({
       model: this.model
     }
   }
-});
+};

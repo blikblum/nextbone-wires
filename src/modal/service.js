@@ -1,3 +1,3 @@
-import {BootstrapModalService} from 'marionette.modalservice';
+import {BootstrapModals} from 'nextbone-modals';
 
-export default new BootstrapModalService();
+export default new BootstrapModals();

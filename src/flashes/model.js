@@ -1,11 +1,11 @@
-import {Model, history} from 'backbone';
+import {Model, history} from "nextbone";
 
-export default Model.extend({
-  defaults: {
+export default class extends Model {
+  static defaults = {
     timeout: false,
     dismissible: true,
     clearOnRoute: true
-  },
+  };
 
   initialize() {
     if (this.get('timeout') !== false) {
@@ -17,11 +17,11 @@ export default Model.extend({
     if (this.get('clearOnRoute')) {
       this.listenTo(history, 'route', this.destroy);
     }
-  },
+  }
 
   _setTimeout() {
     this._timeout = setTimeout(() => this.destroy(), this.get('timeout'));
-  },
+  }
 
   _clearTimeout() {
     if (this._timeout) {
@@ -29,4 +29,4 @@ export default Model.extend({
       delete this._timeout;
     }
   }
-});
+};

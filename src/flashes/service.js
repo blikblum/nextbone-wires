@@ -1,15 +1,20 @@
-import Service from 'radio.service';
+import { Service } from 'nextbone-radio';
 import Collection from './collection';
 import CollectionView from './collection-view';
-import {Region} from 'backbone.marionette';
+import {Region} from "nextbone-routing";
 
-const FlashesService = Service.extend({
+class FlashesService extends Service {
+  static requests = {
+    add: 'add',
+    remove: 'remove',
+  }
+
   setup(options = {}) {
     this.container = options.container;
     if (!this.container) {
       this.container = new Region({el: options.el});
     }    
-  },
+  }
 
   start() {
     this.collection = new Collection();
@@ -17,16 +22,11 @@ const FlashesService = Service.extend({
       collection: this.collection
     });
     this.container.show(this.view);
-  },
-
-  requests: {
-    add: 'add',
-    remove: 'remove',
-  },
+  }  
 
   add(flash) {
     this.collection.add(flash);
-  },
+  }
 
   remove(flash) {
     var model = this.collection.findWhere(flash);
@@ -34,6 +34,6 @@ const FlashesService = Service.extend({
       model.destroy();
     }
   }
-});
+};
 
 export default new FlashesService();

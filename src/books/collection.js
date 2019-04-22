@@ -1,8 +1,11 @@
-import Backbone from 'backbone';
+import { Collection } from "nextbone";
+import { localStorage } from 'nextbone/localstorage'
 import Model from './model';
 
-export default Backbone.Collection.extend({
-  url: '../api/books/fixture.json',
-  localStorage: new Backbone.LocalStorage('books'),
-  model: Model
-});
+@localStorage('books')
+class Books extends Collection {
+  static model = Model;
+  url = '../api/books/fixture.json';  
+};
+
+export default Books

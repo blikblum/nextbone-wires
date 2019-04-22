@@ -1,13 +1,13 @@
-import {Route} from 'marionette.routing';
+import {Route} from "nextbone-routing";
 import View from './view';
 import HeaderService from '../header/service';
 
-export default Route.extend({
-  viewClass: View,
+export default class extends Route {
+  static component = View;
 
   activate() {
     HeaderService.request('activate', {
       path: ''
     });
   }
-});
+};

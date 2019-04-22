@@ -1,19 +1,17 @@
-import {Route} from 'marionette.routing';
-import View from './view';
+import {Route} from "nextbone-routing";
+import View from './color-edit-view';
 import ModalService from '../../modal/service';
 
-export default Route.extend({
 
-  viewClass: View,
+export default class extends Route {
+  static component = View;
 
-  viewOptions() {
-    return {
-      model: this.getContext().request('colorModel')
-    }
-  },
+  prepareEl(el) {
+    el.model = this.context.colorModel
+  }
 
   deactivate(transition) {
-    if (this.view.hasUnsavedChanges()) {
+    if (this.el.hasUnsavedChanges()) {
       return ModalService.request('confirm', {
         title : 'You have unsaved changes',
         text  : `Are you sure you want to exit without saving?`,
@@ -26,4 +24,4 @@ export default Route.extend({
       });            
     }
   }
-});
+};

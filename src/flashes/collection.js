@@ -1,6 +1,6 @@
-import {Collection} from 'backbone';
+import {Collection} from "nextbone";
 import Model from './model';
 
-export default Collection.extend({
-  model: Model
-});
+export default class extends Collection {
+  static model = Model;
+};

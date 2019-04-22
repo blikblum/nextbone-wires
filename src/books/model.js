@@ -1,8 +1,9 @@
-import {Model} from 'backbone';
+import {Model} from "nextbone";
 
-export default Model.extend({
-  urlRoot: '/api/books',
+export default class extends Model {
+  urlRoot = '/api/books';
+
   isActive() {
     return this.collection.active === this;
   }
-});
+};

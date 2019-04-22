@@ -1,13 +1,12 @@
-import Backbone from 'backbone';
+import * as Backbone from "nextbone";
 
-export default Backbone.Model.extend({
-  urlRoot: '/api/colors',
+export default class extends Backbone.Model {
+  urlRoot = '/api/colors';
+  localStorage = new Backbone.LocalStorage('colors');
 
-  localStorage: new Backbone.LocalStorage('colors'),
-
-  defaults: {
+  static defaults = {
     active: false
-  },
+  };
 
   validate(attrs = {}) {
     let errors = [];
@@ -22,4 +21,4 @@ export default Backbone.Model.extend({
 
     return errors.length > 0 ? errors : undefined;
   }
-});
+};

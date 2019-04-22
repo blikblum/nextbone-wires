@@ -1,25 +1,18 @@
 import Component from '../../component';
-import {props} from 'skatejs';
 import _ from 'underscore';
-import template from './paging-bar.hbs';
+import { html } from 'lit-html';
 
 class PagingBar extends Component {
-  template = template
 
-  // disable shadow dom
-  get renderRoot () {
-    return this;
-  }
-
-  static get props() {
+  static get properties() {
     return {
-      count: props.number,
-      start: props.number,
-      limit: props.number
+      count: {type: Number},
+      start: {type: Number},
+      limit: {type: Number}
     };
   }
 
-  templateContext() {
+  calculateValues() {
     let total   = Math.ceil(this.props.count / this.props.limit);
     let current = Math.ceil(this.props.start / this.props.limit) + 1;
 
@@ -34,6 +27,12 @@ class PagingBar extends Component {
     let next = current < total ? current + 1 : false;
 
     return { total, current, pages, prev, next };
+  }
+
+  render() {
+    const { total, current, pages, prev, next } = calculateValues()
+    return html`<div className="text-center"><ul className="pagination">${Boolean(prev) ? html`            <li className="page-item"><a className="page-link" href=${"#colors?page=" + prev}>«</a></li>` : html`            <li className="page-item disabled"><a className="page-link">«</a></li>`}${pages.map((item, i) => html``)}${Boolean(item.next) ? html`            <li className="page-item"><a className="page-link" href=${"#colors?page=" + item.next}>»</a></li>` : html`            <li className="disabled page-item"><a className="page-link">»</a></li>`}    </ul></div>`;
+
   }
 }
 

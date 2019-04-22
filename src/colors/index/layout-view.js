@@ -1,6 +1,6 @@
 import _ from 'underscore';
-import {View} from 'backbone.marionette';
-import {Collection} from 'backbone';
+import {Component} from "component";
+import {Collection} from "nextbone";
 import './paging-bar';
 import renderer from '../../snabbdom-renderer';
 

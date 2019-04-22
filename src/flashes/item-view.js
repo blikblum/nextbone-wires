@@ -1,22 +1,22 @@
-import {View} from 'backbone.marionette';
+import {Component} from "component";
 import template from './item-template.hbs';
 
-export default View.extend({
-  template: template,
+export default class extends Component {
+  render = template;
 
   className() {
     return `flashes__alert alert alert-${this.model.get('type')}`;
-  },
+  }
 
-  attributes: {
+  attributes = {
     role: 'alert'
-  },
+  };
 
-  events: {
+  events = {
     'click button.close': 'dismiss'
-  },
+  };
 
   dismiss() {
     this.model.destroy();
   }
-});
+};

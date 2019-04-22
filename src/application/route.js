@@ -1,6 +1,45 @@
-import {Route} from 'marionette.routing';
+import {Route} from "nextbone-routing";
 import LayoutView from './layout-view';
 import HeaderService from '../header/service';
+
+//based on https://tympanus.net/Development/PageTransitions/
+
+class PageTransitionRegion extends Region {
+  initialize(options) {
+    this.animation = options.animation;
+  }
+
+  attachHtml(view) {
+    var hasAnimation = !!this.animation && !!this.animation.inClass;
+
+    this.$el.append(view.el);
+    view.$el.addClass("pt-page pt-page-current");
+    if (hasAnimation && this.isSwappingView()) {
+      this.$el.css('overflow', 'hidden');
+      view.$el.addClass(this.animation.inClass).one("animationend", () => {
+        this.$el.css('overflow', '');
+        view.$el.removeClass(this.animation.inClass);
+        view.triggerMethod('page:transition:end');
+      });
+    } else {
+      view.triggerMethod('page:transition:end');
+    }
+  }
+
+  removeView(view) {
+    var hasAnimation = !!this.animation && !!this.animation.outClass;
+
+    if (hasAnimation && this.isSwappingView()) {
+      this.$el.css('overflow', 'hidden');
+      view.$el.addClass(this.animation.outClass).one("animationend", () => { 
+        this.$el.css('overflow', '');
+        view.destroy();
+      });
+    } else {
+      view.destroy();
+    }
+  }
+}
 
 function getTransitionTarget(routes) {
   let lastRoute, dotIndex;
@@ -12,16 +51,16 @@ function getTransitionTarget(routes) {
   return ''
 }
 
-export default Route.extend({
-  viewClass: LayoutView,
+export default class extends Route {
+  static component = LayoutView;
 
-  activate () {
+  activate() {
     return HeaderService.request('getItems').then(items => {
       this.headerItems = items;
     })
-  },
+  }
 
-  getOutlet() {
+  getOutletFake() {
     // dynamically determine transition direction
     // see more options at https://tympanus.net/Development/PageTransitions/ source
     let inClass, outClass;
@@ -57,4 +96,4 @@ export default Route.extend({
 
     return outlet;
   }
-});
+};

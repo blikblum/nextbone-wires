@@ -1,8 +1,8 @@
-import Backbone from 'backbone';
+import * as Backbone from "nextbone";
 import Model from './model';
 
-export default Backbone.Collection.extend({
-  url: '../api/colors/fixture.json',
-  localStorage: Model.prototype.localStorage,
-  model: Model
-});
+export default class extends Backbone.Collection {
+  url = '../api/colors/fixture.json';
+  localStorage = Model.prototype.localStorage;
+  static model = Model;
+};
