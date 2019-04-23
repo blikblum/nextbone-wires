@@ -1,8 +1,9 @@
-import * as Backbone from "nextbone";
+import {Model} from "nextbone";
+import {localStorage} from 'nextbone/localstorage'
 
-export default class extends Backbone.Model {
-  urlRoot = '/api/colors';
-  localStorage = new Backbone.LocalStorage('colors');
+@localStorage('colors')
+class Color extends Model {
+  urlRoot = '/api/colors';  
 
   static defaults = {
     active: false
@@ -22,3 +23,5 @@ export default class extends Backbone.Model {
     return errors.length > 0 ? errors : undefined;
   }
 };
+
+export default Color

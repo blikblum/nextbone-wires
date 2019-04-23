@@ -48,6 +48,13 @@ router.on('all', function(...args) {
   routerChannel.trigger(...args)
 })
 
+router.on('transition:error', (error) => {
+  FlashesService.request('add', {
+    type: 'danger',
+    title: `Transition Error:${error.message || error}`
+  })  
+})
+
 function ColorsRoute () {
   return import('./colors/route');
 }

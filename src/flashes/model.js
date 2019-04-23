@@ -1,4 +1,5 @@
-import {Model, history} from "nextbone";
+import {Model} from "nextbone";
+import { Radio } from "nextbone-radio";
 
 export default class extends Model {
   static defaults = {
@@ -15,7 +16,7 @@ export default class extends Model {
     this.on('destroy', this._clearTimeout);
 
     if (this.get('clearOnRoute')) {
-      this.listenTo(history, 'route', this.destroy);
+      this.listenTo(Radio.channel('router'), 'transition', this.destroy);
     }
   }
 

@@ -2,12 +2,9 @@ import {Component} from "component";
 import nprogress from 'nprogress';
 import ModalService from '../../modal/service';
 import FlashesService from '../../flashes/service';
-import template from './template.hbs';
 import { Radio } from "nextbone-radio";
 
-export default class ColorView extends Component {
-  render = template;
-
+export default class ColorView extends Component {  
   initialize(options = {}) {
     this.model = options.model;
   }

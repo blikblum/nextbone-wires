@@ -1,7 +1,5 @@
-import { Component, Region, html } from "component";
+import { Component, html } from "component";
 import { Region } from 'nextbone-routing';
-import template from './layout-template.hbs';
-import LibraryView from './library/collection-view';
 
 
 // inspired by https://3dtransforms.desandro.com/card-flip

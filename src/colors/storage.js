@@ -1,10 +1,10 @@
-import Storage from 'backbone.storage';
+import { Storage } from 'nextbone-state';
 import Model from './model';
 import Collection from './collection';
 
-var ColorsStorage = Storage.extend({
-  model: Model,
-  collection: Collection
-});
+class ColorsStorage extends Storage{
+  static model = Model
+  static collection = Collection
+};
 
 export default new ColorsStorage();

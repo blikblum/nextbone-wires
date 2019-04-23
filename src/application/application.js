@@ -3,7 +3,6 @@ import _ from 'underscore';
 import { Radio } from "nextbone-radio";
 import { Events } from "nextbone";
 import nprogress from 'nprogress';
-import {Application} from "component";
 
 nprogress.configure({
   showSpinner: false

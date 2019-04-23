@@ -1,5 +1,5 @@
-import {Route} from "nextbone-routing";
-import LayoutView from './layout-view';
+import {Route, Region} from "nextbone-routing";
+import ApplicationView from './application-view';
 import HeaderService from '../header/service';
 
 //based on https://tympanus.net/Development/PageTransitions/
@@ -52,7 +52,7 @@ function getTransitionTarget(routes) {
 }
 
 export default class extends Route {
-  static component = LayoutView;
+  static component = ApplicationView;
 
   activate() {
     return HeaderService.request('getItems').then(items => {

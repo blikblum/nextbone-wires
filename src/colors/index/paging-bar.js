@@ -1,4 +1,4 @@
-import Component from '../../component';
+import { Component } from 'component';
 import _ from 'underscore';
 import { html } from 'lit-html';
 
