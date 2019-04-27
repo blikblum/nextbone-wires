@@ -1,31 +1,31 @@
-describe('flashes/service', function() {
+describe('flashes/service', () => {
   beforeEach(function() {
     this.collection = { findWhere: stub(), add: stub() };
     this.collectionView = { collectionView: true };
 
-    this.Collection     = stub().returns(this.collection);
+    this.Collection = stub().returns(this.collection);
     this.CollectionView = stub().returns(this.collectionView);
 
     this.container = { show: stub() };
 
     this.service = proxyquire('../../src/flashes/service.js', {
-      './collection'      : this.Collection,
-      './collection-view' : this.CollectionView
+      './collection': this.Collection,
+      './collection-view': this.CollectionView,
     }).default;
 
     this.service.setup({
-      container: this.container
+      container: this.container,
     });
     this.service.start();
   });
 
-  describe('#setup', function() {
+  describe('#setup', () => {
     it('should attach container', function() {
       expect(this.service).to.have.ownProperty('container', this.container);
     });
   });
 
-  describe('#start', function() {
+  describe('#start', () => {
     it('should create a collection', function() {
       expect(this.Collection).to.have.been.calledWithNew;
       expect(this.service).to.have.property('collection', this.collection);
@@ -33,7 +33,7 @@ describe('flashes/service', function() {
 
     it('should create a CollectionView', function() {
       expect(this.CollectionView).to.have.been.calledWithNew.and.calledWith({
-        collection: this.collection
+        collection: this.collection,
       });
     });
 
@@ -42,7 +42,7 @@ describe('flashes/service', function() {
     });
   });
 
-  describe('#add', function() {
+  describe('#add', () => {
     beforeEach(function() {
       this.flash = { flash: true };
       this.service.add(this.flash);
@@ -53,8 +53,8 @@ describe('flashes/service', function() {
     });
   });
 
-  describe('#remove', function() {
-    describe('when model exists', function() {
+  describe('#remove', () => {
+    describe('when model exists', () => {
       beforeEach(function() {
         this.model = { destroy: stub() };
         this.collection.findWhere.returns(this.model);
@@ -66,14 +66,14 @@ describe('flashes/service', function() {
       });
     });
 
-    describe('when model does not exist', function() {
+    describe('when model does not exist', () => {
       beforeEach(function() {
         spy(Backbone.Model.prototype, 'destroy');
         this.collection.findWhere.returns(undefined);
         this.service.remove();
       });
 
-      it('should not destroy anything', function() {
+      it('should not destroy anything', () => {
         expect(Backbone.Model.prototype.destroy).not.to.have.been.called;
       });
     });

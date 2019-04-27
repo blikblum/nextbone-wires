@@ -1,8 +1,8 @@
-describe('colors/collection', function() {
+describe('colors/collection', () => {
   beforeEach(function() {
     this.Model = stub();
     this.Collection = proxyquire('../../src/colors/collection.js', {
-      './model' : this.Model
+      './model': this.Model,
     });
   });
 });

@@ -1,10 +1,10 @@
 module.exports = function() {
-  var Widget = this.Widget;
+  const {Widget} = this;
 
   Widget.BooksViewer = Widget.extend({
     root: '.books__viewer',
-    getTitle: function() {
+    getTitle() {
       return this.read('.books__title h1');
-    }
+    },
   });
 };

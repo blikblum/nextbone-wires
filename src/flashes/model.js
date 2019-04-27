@@ -1,11 +1,11 @@
-import {Model} from "nextbone";
-import { Radio } from "nextbone-radio";
+import { Model } from 'nextbone';
+import { Radio } from 'nextbone-radio';
 
 export default class extends Model {
   static defaults = {
     timeout: false,
     dismissible: true,
-    clearOnRoute: true
+    clearOnRoute: true,
   };
 
   initialize() {
@@ -30,4 +30,4 @@ export default class extends Model {
       delete this._timeout;
     }
   }
-};
+}

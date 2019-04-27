@@ -1,4 +1,4 @@
-import {Route} from "nextbone-routing";
+import { Route } from 'nextbone-routing';
 import View from './view';
 import storage from '../storage';
 
@@ -10,16 +10,16 @@ export default class extends Route {
   }
 
   static contextRequests = {
-    colorModel: function () {
-      return this.model
-    }
+    colorModel() {
+      return this.model;
+    },
   };
 
   static component = View;
 
   viewOptions() {
     return {
-      model: this.model
-    }
+      model: this.model,
+    };
   }
-};
+}

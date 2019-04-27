@@ -1,14 +1,14 @@
-describe('flashes/item-view', function() {
+describe('flashes/item-view', () => {
   beforeEach(function() {
     this.model = { get: stub(), destroy: stub() };
     this.ItemView = proxyquire('../../src/flashes/item-view.js', {
-      './item-template.hbs' : stub(),
+      './item-template.hbs': stub(),
     }).default;
 
     this.itemView = new this.ItemView({ model: this.model });
   });
 
-  describe('#className', function() {
+  describe('#className', () => {
     beforeEach(function() {
       this.model.get.returns('foo');
       spy(this.itemView, 'className');
@@ -20,7 +20,7 @@ describe('flashes/item-view', function() {
     });
   });
 
-  describe('#dismiss', function() {
+  describe('#dismiss', () => {
     beforeEach(function() {
       this.itemView.dismiss();
     });

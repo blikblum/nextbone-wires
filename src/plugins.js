@@ -1,5 +1,5 @@
-import { delegate } from "nextbone";
+import { delegate } from 'nextbone';
 import $ from 'jquery';
 import 'bootstrap';
 
-delegate.$ = $
+delegate.$ = $;

@@ -1,39 +1,43 @@
 import { Service } from 'nextbone-radio';
+import { Region } from 'nextbone-routing';
 import Collection from './collection';
-import CollectionView from './collection-view';
-import {Region} from "nextbone-routing";
+import FlashesView from './flashes-view';
 
 class FlashesService extends Service {
   static requests = {
     add: 'add',
     remove: 'remove',
-  }
+  };
 
   setup(options = {}) {
     this.container = options.container;
-    if (!this.container) {
-      this.container = new Region({el: options.el});
-    }    
   }
 
   start() {
+    const {container} = this;
+    if (container instanceof Region) {
+      this.containerRegion = container;
+    } else if (container instanceof HTMLElement) {
+      this.containerRegion = new Region(container);
+    } else {
+      this.containerRegion = new Region(document.querySelector(container));
+    }
     this.collection = new Collection();
-    this.view = new CollectionView({
-      collection: this.collection
-    });
-    this.container.show(this.view);
-  }  
+    this.el = new FlashesView();
+    this.el.collection = this.collection;
+    this.containerRegion.show(this.el);
+  }
 
   add(flash) {
     this.collection.add(flash);
   }
 
   remove(flash) {
-    var model = this.collection.findWhere(flash);
+    const model = this.collection.findWhere(flash);
     if (model) {
       model.destroy();
     }
   }
-};
+}
 
 export default new FlashesService();

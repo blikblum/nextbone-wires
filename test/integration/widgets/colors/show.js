@@ -1,46 +1,42 @@
-var Promise = require('bluebird');
-var _ = require('lodash');
+const Promise = require('bluebird');
+const _ = require('lodash');
 
 module.exports = function() {
-  var Widget = this.Widget;
+  const {Widget} = this;
 
   Widget.ColorsShow = Widget.extend({
     root: '.colors--show',
 
-    edit: function() {
+    edit() {
       return this.click({
-        text: 'Edit'
+        text: 'Edit',
       });
     },
 
-    isActive: function() {
+    isActive() {
       return this.find({
-        text: 'Deactivate'
-      }).then(function(el) {
-        return !!el;
-      });
+        text: 'Deactivate',
+      }).then((el) => !!el);
     },
 
-    destroy: function() {
+    destroy() {
       return this.click({
-        text: 'Destroy'
+        text: 'Destroy',
       });
     },
 
-    getDetails: function() {
+    getDetails() {
       return new Widget.ColorsShow.Details().toHash();
-    }
+    },
   });
 
   Widget.ColorsShow.DetailsItem = Widget.extend({
-    toHash: function() {
+    toHash() {
       return Promise.all([
         this.read('.list-group-item-heading'),
-        this.read('.list-group-item-text')
-      ]).spread(function(headline, contents) {
-        return _.object([headline.toLowerCase()], [contents]);
-      });
-    }
+        this.read('.list-group-item-text'),
+      ]).spread((headline, contents) => _.object([headline.toLowerCase()], [contents]));
+    },
   });
 
   Widget.ColorsShow.Details = Widget.List.extend({
@@ -48,10 +44,12 @@ module.exports = function() {
     root: '.list-group',
     itemClass: Widget.ColorsShow.DetailsItem,
 
-    toHash: function() {
-      return this.invoke('toHash').then(function(colors) {
-        return _.reduce(colors, function(a, b) { return _.extend(a, b); }, {});
-      });
-    }
+    toHash() {
+      return this.invoke('toHash').then((colors) => _.reduce(
+          colors,
+          (a, b) => _.extend(a, b),
+          {},
+        ));
+    },
   });
 };

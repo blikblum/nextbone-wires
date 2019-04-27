@@ -1,13 +1,13 @@
 if (!global.document || !global.window) {
   require('babel-register');
 
-  var jsdom = require('jsdom').jsdom;
+  const {jsdom} = require('jsdom');
 
   global.document = jsdom('<html><head><script></script></head><body></body></html>', {
-    FetchExternalResources   : ['script'],
-    ProcessExternalResources : ['script'],
-    MutationEvents           : '2.0',
-    QuerySelector            : false
+    FetchExternalResources: ['script'],
+    ProcessExternalResources: ['script'],
+    MutationEvents: '2.0',
+    QuerySelector: false,
   });
 
   global.window = document.defaultView;
@@ -17,10 +17,10 @@ if (!global.document || !global.window) {
 
 global.$ = global.jQuery = require('jquery/dist/jquery')(global.window);
 
-var proxyquire = require('proxyquire').noCallThru();
-var sinon = require('sinon');
-var chai = require('chai');
-var sinonChai = require('sinon-chai');
+const proxyquire = require('proxyquire').noCallThru();
+const sinon = require('sinon');
+const chai = require('chai');
+const sinonChai = require('sinon-chai');
 
 chai.use(sinonChai);
 

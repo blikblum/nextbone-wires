@@ -1,16 +1,16 @@
-import {Model} from "nextbone";
-import {localStorage} from 'nextbone/localstorage'
+import { Model } from 'nextbone';
+import { localStorage } from 'nextbone/localstorage';
 
 @localStorage('colors')
 class Color extends Model {
-  urlRoot = '/api/colors';  
+  urlRoot = '/api/colors';
 
   static defaults = {
-    active: false
+    active: false,
   };
 
   validate(attrs = {}) {
-    let errors = [];
+    const errors = [];
 
     if (attrs.name === '') {
       errors.push('Missing "name" field');
@@ -22,6 +22,6 @@ class Color extends Model {
 
     return errors.length > 0 ? errors : undefined;
   }
-};
+}
 
-export default Color
+export default Color;

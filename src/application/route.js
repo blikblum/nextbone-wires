@@ -1,8 +1,8 @@
-import {Route, Region} from "nextbone-routing";
+import { Route, Region } from 'nextbone-routing';
 import ApplicationView from './application-view';
 import HeaderService from '../header/service';
 
-//based on https://tympanus.net/Development/PageTransitions/
+// based on https://tympanus.net/Development/PageTransitions/
 
 class PageTransitionRegion extends Region {
   initialize(options) {
@@ -10,13 +10,13 @@ class PageTransitionRegion extends Region {
   }
 
   attachHtml(view) {
-    var hasAnimation = !!this.animation && !!this.animation.inClass;
+    const hasAnimation = !!this.animation && !!this.animation.inClass;
 
     this.$el.append(view.el);
-    view.$el.addClass("pt-page pt-page-current");
+    view.$el.addClass('pt-page pt-page-current');
     if (hasAnimation && this.isSwappingView()) {
       this.$el.css('overflow', 'hidden');
-      view.$el.addClass(this.animation.inClass).one("animationend", () => {
+      view.$el.addClass(this.animation.inClass).one('animationend', () => {
         this.$el.css('overflow', '');
         view.$el.removeClass(this.animation.inClass);
         view.triggerMethod('page:transition:end');
@@ -27,11 +27,11 @@ class PageTransitionRegion extends Region {
   }
 
   removeView(view) {
-    var hasAnimation = !!this.animation && !!this.animation.outClass;
+    const hasAnimation = !!this.animation && !!this.animation.outClass;
 
     if (hasAnimation && this.isSwappingView()) {
       this.$el.css('overflow', 'hidden');
-      view.$el.addClass(this.animation.outClass).one("animationend", () => { 
+      view.$el.addClass(this.animation.outClass).one('animationend', () => {
         this.$el.css('overflow', '');
         view.destroy();
       });
@@ -42,13 +42,13 @@ class PageTransitionRegion extends Region {
 }
 
 function getTransitionTarget(routes) {
-  let lastRoute, dotIndex;
+  let lastRoute; let dotIndex;
   if (routes.length) {
     lastRoute = routes[routes.length - 1];
     dotIndex = lastRoute.name.indexOf('.');
     return dotIndex === -1 ? lastRoute.name : lastRoute.name.slice(0, dotIndex);
   }
-  return ''
+  return '';
 }
 
 export default class extends Route {
@@ -57,13 +57,13 @@ export default class extends Route {
   activate() {
     return HeaderService.request('getItems').then(items => {
       this.headerItems = items;
-    })
+    });
   }
 
   getOutletFake() {
     // dynamically determine transition direction
     // see more options at https://tympanus.net/Development/PageTransitions/ source
-    let inClass, outClass;
+    let inClass; let outClass;
     const transition = this.$router.state.activeTransition;
     const target = getTransitionTarget(transition.routes);
     const prevTarget = getTransitionTarget(transition.prev.routes);
@@ -75,19 +75,21 @@ export default class extends Route {
         inClass = 'pt-page-moveFromBottom pt-page-ontop';
       } else {
         outClass = 'pt-page-moveToBottom pt-page-ontop';
-				inClass = 'pt-page-scaleUp';
+        inClass = 'pt-page-scaleUp';
       }
     } else {
       // do a horizontal animation
-      const direction = this.headerItems.findIndex(model => model.get('path') === target) - this.headerItems.findIndex(model => model.get('path') === prevTarget);
+      const direction =
+        this.headerItems.findIndex(model => model.get('path') === target) -
+        this.headerItems.findIndex(model => model.get('path') === prevTarget);
 
       if (direction < 0) {
         outClass = 'pt-page-moveToRight';
-        inClass = 'pt-page-moveFromLeft';        
+        inClass = 'pt-page-moveFromLeft';
       } else {
         outClass = 'pt-page-moveToLeft';
-        inClass = 'pt-page-moveFromRight';        
-      }      
+        inClass = 'pt-page-moveFromRight';
+      }
     }
 
     const outlet = this.view.getRegion('content');
@@ -96,4 +98,4 @@ export default class extends Route {
 
     return outlet;
   }
-};
+}

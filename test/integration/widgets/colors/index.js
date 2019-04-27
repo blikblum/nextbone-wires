@@ -1,18 +1,18 @@
 module.exports = function() {
-  var Widget = this.Widget;
+  const {Widget} = this;
 
   Widget.ColorsIndex = Widget.extend({
     root: '.colors--index',
 
-    create: function() {
+    create() {
       return this.click({
-        text: 'Create'
+        text: 'Create',
       });
-    }
+    },
   });
 
   Widget.ColorsIndex.List = Widget.List.extend({
     root: '.colors .list-group',
-    itemSelector: '.colors__item'
+    itemSelector: '.colors__item',
   });
 };

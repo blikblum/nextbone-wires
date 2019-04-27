@@ -1,29 +1,34 @@
-import {Service} from 'nextbone-radio';
-import {Collection} from "nextbone";
-import {Region} from "nextbone-routing";
-import View from './view';
+import { Service } from 'nextbone-radio';
+import { Collection } from 'nextbone';
+import { Region } from 'nextbone-routing';
+import View from './header-view';
 
 class HeaderService extends Service {
   static requests = {
     add: 'add',
     remove: 'remove',
     activate: 'activate',
-    getItems: 'getItems'
-  }
+    getItems: 'getItems',
+  };
 
   setup(options = {}) {
     this.container = options.container;
-    if (!this.container) {
-      this.container = new Region({el: options.el});
-    }
   }
 
   start() {
+    const { container } = this;
+    if (container instanceof Region) {
+      this.containerRegion = container;
+    } else if (container instanceof HTMLElement) {
+      this.containerRegion = new Region(container);
+    } else {
+      this.containerRegion = new Region(document.querySelector(container));
+    }
     this.collection = new Collection();
-    this.view = new View({ collection: this.collection });
-    this.container.show(this.view);
+    this.el = new View();
+    this.el.collection = this.collection;
+    this.containerRegion.show(this.el);
   }
-
 
   add(model) {
     this.collection.add(model);
@@ -45,6 +50,6 @@ class HeaderService extends Service {
   getItems() {
     return this.collection;
   }
-};
+}
 
 export default new HeaderService();

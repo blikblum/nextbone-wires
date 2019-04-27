@@ -1,9 +1,10 @@
-var _ = require('lodash');
-var Backbone = require('backbone');
-Backbone.$ = $;
-var Marionette = require('backbone.marionette');
+const _ = require('lodash');
+const Backbone = require('backbone');
 
-before(function() {
+Backbone.$ = $;
+const Marionette = require('backbone.marionette');
+
+before(() => {
   global._ = _;
   global.Backbone = Backbone;
   global.Marionette = Marionette;
@@ -12,7 +13,7 @@ before(function() {
 beforeEach(function() {
   this.sinon = sinon.sandbox.create();
   global.stub = this.sinon.stub.bind(this.sinon);
-  global.spy  = this.sinon.spy.bind(this.sinon);
+  global.spy = this.sinon.spy.bind(this.sinon);
 });
 
 afterEach(function() {

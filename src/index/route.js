@@ -1,4 +1,4 @@
-import {Route} from "nextbone-routing";
+import { Route } from 'nextbone-routing';
 import View from './view';
 import HeaderService from '../header/service';
 
@@ -7,7 +7,7 @@ export default class extends Route {
 
   activate() {
     HeaderService.request('activate', {
-      path: ''
+      path: '',
     });
   }
-};
+}

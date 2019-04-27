@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import _ from 'underscore';
-import { Radio } from "nextbone-radio";
-import { Events } from "nextbone";
+import { Radio } from 'nextbone-radio';
+import { Events } from 'nextbone';
 import nprogress from 'nprogress';
 
 nprogress.configure({
-  showSpinner: false
+  showSpinner: false,
 });
 
 export default class Application extends Events {
@@ -13,15 +13,15 @@ export default class Application extends Events {
     this.$body = $(document.body);
 
     this.listenTo(Radio.channel('router'), {
-      'before:transition' : this.onBeforeTransition,
-      'transition'        : this.onTransition,
-      'transition:abort'  : this.onTransitionAbort
+      'before:transition': this.onBeforeTransition,
+      transition: this.onTransition,
+      'transition:abort': this.onTransitionAbort,
     });
   }
 
   onBeforeTransition() {
     this.transitioning = true;
-    // Don't show for synchronous route changes takin more than 50ms    
+    // Don't show for synchronous route changes takin more than 50ms
     _.delay(() => {
       if (this.transitioning) {
         nprogress.start();
@@ -39,4 +39,4 @@ export default class Application extends Events {
     this.transitioning = false;
     nprogress.done(true);
   }
-};
+}

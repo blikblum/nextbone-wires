@@ -1,4 +1,4 @@
-describe('colors/show/view', function() {
+describe('colors/show/view', () => {
   beforeEach(function() {
     this.template = stub();
 
@@ -6,13 +6,13 @@ describe('colors/show/view', function() {
     this.model.url = 'foo';
 
     this.View = proxyquire('../../src/colors/show/view.js', {
-      './template.hbs' : this.template
+      './template.hbs': this.template,
     }).default;
 
     this.itemView = new this.View({ model: this.model });
   });
 
-  describe('#initialize', function() {
+  describe('#initialize', () => {
     beforeEach(function() {
       this.itemView.initialize({ model: this.model });
     });
@@ -22,7 +22,7 @@ describe('colors/show/view', function() {
     });
   });
 
-  describe('#templateHelpers', function() {
+  describe('#templateHelpers', () => {
     beforeEach(function() {
       spy(this.itemView, 'templateHelpers');
       this.model.validationError = 'foo';
@@ -32,42 +32,42 @@ describe('colors/show/view', function() {
 
     it('should return model errors', function() {
       expect(this.itemView.templateHelpers).to.have.returned({
-        errors: this.model.validationError
+        errors: this.model.validationError,
       });
     });
   });
 
-  describe('#handleToggle', function() {
+  describe('#handleToggle', () => {
     beforeEach(function() {
       this.itemView.handleToggle();
     });
   });
 
-  describe('#handleToggleFailure', function() {
+  describe('#handleToggleFailure', () => {
     beforeEach(function() {
       this.itemView.handleToggleFailure();
     });
   });
 
-  describe('#handleDestroy', function() {
+  describe('#handleDestroy', () => {
     beforeEach(function() {
       this.itemView.handleDestroy();
     });
   });
 
-  describe('#handleConfirmDestroy', function() {
+  describe('#handleConfirmDestroy', () => {
     beforeEach(function() {
       this.itemView.handleConfirmDestroy();
     });
   });
 
-  describe('#handleCancelDestroy', function() {
+  describe('#handleCancelDestroy', () => {
     beforeEach(function() {
       this.itemView.handleCancelDestroy();
     });
   });
 
-  describe('#handleDestroySuccess', function() {
+  describe('#handleDestroySuccess', () => {
     beforeEach(function() {
       this.itemView.handleDestroySuccess();
     });

@@ -1,10 +1,10 @@
-describe('flashes/model', function() {
+describe('flashes/model', () => {
   beforeEach(function() {
     this.Model = proxyquire('../../src/flashes/model.js', {}).default;
     this.model = new this.Model();
   });
 
-  describe('#initialize', function() {
+  describe('#initialize', () => {
     beforeEach(function() {
       stub(this.model, '_setTimeout');
       stub(this.model, '_clearTimeout');
@@ -17,7 +17,7 @@ describe('flashes/model', function() {
       expect(this.model.on).to.have.been.calledWith('destroy', this.model._clearTimeout);
     });
 
-    describe('when "timeout" is false', function() {
+    describe('when "timeout" is false', () => {
       beforeEach(function() {
         this.model.initialize();
       });
@@ -27,7 +27,7 @@ describe('flashes/model', function() {
       });
     });
 
-    describe('when "timeout" is an integer', function() {
+    describe('when "timeout" is an integer', () => {
       beforeEach(function() {
         this.model.attributes.timeout = 300;
         this.model.initialize();
@@ -38,18 +38,21 @@ describe('flashes/model', function() {
       });
     });
 
-    describe('when "clearOnRoute" is true', function() {
+    describe('when "clearOnRoute" is true', () => {
       beforeEach(function() {
         this.model.initialize();
       });
 
       it('should listen for "route" events', function() {
-        expect(this.model.listenTo)
-          .to.have.been.calledWith(Backbone.history, 'route', this.model.destroy);
+        expect(this.model.listenTo).to.have.been.calledWith(
+          Backbone.history,
+          'route',
+          this.model.destroy,
+        );
       });
     });
 
-    describe('when "clearOnRoute" is false', function() {
+    describe('when "clearOnRoute" is false', () => {
       beforeEach(function() {
         this.model.set('clearOnRoute', false);
         this.model.initialize();

@@ -1,11 +1,11 @@
 module.exports = function() {
-  var Widget = this.Widget;
+  const {Widget} = this;
 
   Widget.ColorsCreate = Widget.extend({
-    root: '.colors--create'
+    root: '.colors--create',
   });
 
   Widget.ColorsCreate.Form = Widget.Form.extend({
-    root: '.colors__form'
+    root: '.colors__form',
   });
 };

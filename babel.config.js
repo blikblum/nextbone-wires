@@ -1,31 +1,29 @@
 module.exports = {
-  'presets': [
+  presets: [
     [
       '@babel/preset-env',
       {
-        'targets': {
-          'browsers': [
-            'chrome 60'
-          ]
+        targets: {
+          browsers: ['chrome 60'],
         },
-        'modules': false
-      }
-    ]
+        modules: false,
+      },
+    ],
   ],
-  'plugins': [
+  plugins: [
     [
       '@babel/plugin-proposal-decorators',
       {
-        'legacy': false,
-        'decoratorsBeforeExport': false
-      }
+        legacy: false,
+        decoratorsBeforeExport: false,
+      },
     ],
     [
       '@babel/plugin-proposal-class-properties',
       {
-        'loose': true
-      }
+        loose: true,
+      },
     ],
-    '@babel/plugin-syntax-dynamic-import'
-  ]
-}
+    '@babel/plugin-syntax-dynamic-import',
+  ],
+};

@@ -1,10 +1,10 @@
 module.exports = function() {
-  var Widget = this.Widget;
+  const {Widget} = this;
 
   Widget.Modal = Widget.extend({
     root: '.modal-dialog',
-    confirm: function() {
-      return this.click({text: 'Affirmative'});
-    }
+    confirm() {
+      return this.click({ text: 'Affirmative' });
+    },
   });
 };

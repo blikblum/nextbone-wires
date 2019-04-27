@@ -1,24 +1,20 @@
-var Driver = require('selenium-webdriver');
+const Driver = require('selenium-webdriver');
 
 module.exports = function() {
-  var Widget = this.Widget;
+  const {Widget} = this;
 
   Widget.ColorsEdit = Widget.extend({
-    root: '.colors--edit'
+    root: '.colors--edit',
   });
 
   Widget.ColorsEdit.Form = Widget.Form.extend({
     root: '.colors__form',
 
-    clearAndSubmitWith: function(vals) {
-      var self = this;
-      return this.findAll('input').then(function(els) {
-        return Driver.promise.map(els, function(el) {
-          return el.clear();
-        });
-      }).then(function() {
-        return self.submitWith(vals);
-      });
-    }
+    clearAndSubmitWith(vals) {
+      const self = this;
+      return this.findAll('input')
+        .then((els) => Driver.promise.map(els, (el) => el.clear()))
+        .then(() => self.submitWith(vals));
+    },
   });
 };

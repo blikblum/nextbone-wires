@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-serve",
-    "prod": "webpack --run-prod --mode production"
+    "prod": "webpack --run-prod --mode production",
+    "lint": "eslint src test --ext .js",
+    "format": "prettier \"**/*.js\" --write"
   },
   "repository": "https://github.com/blikblum/nextbone-wires.git",
   "keywords": [
@@ -23,7 +25,7 @@
     "nextbone": "^0.10.0",
     "nextbone-modals": "^0.9.0",
     "nextbone-radio": "^0.2.0",
-    "nextbone-routing": "^0.5.1",
+    "nextbone-routing": "^0.6.0",
     "nextbone-state": "^0.5.1",
     "nprogress": "^0.2.0",
     "popper.js": "^1.14.6",
@@ -35,9 +37,12 @@
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@open-wc/eslint-config": "^0.4.3",
+    "@open-wc/prettier-config": "^0.1.10",
     "babel-loader": "^8.0.0",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
+    "eslint": "^5.16.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",

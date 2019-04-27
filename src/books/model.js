@@ -1,4 +1,4 @@
-import {Model} from "nextbone";
+import { Model } from 'nextbone';
 
 export default class extends Model {
   urlRoot = '/api/books';
@@ -6,4 +6,4 @@ export default class extends Model {
   isActive() {
     return this.collection.active === this;
   }
-};
+}

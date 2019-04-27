@@ -1,15 +1,15 @@
-describe('colors/model', function() {
+describe('colors/model', () => {
   beforeEach(function() {
     this.Model = proxyquire('../../src/colors/model.js', {}).default;
     this.model = new this.Model();
   });
 
-  describe('#validate', function() {
+  describe('#validate', () => {
     beforeEach(function() {
       spy(this.model, 'validate');
     });
 
-    describe('when missing "name" field', function() {
+    describe('when missing "name" field', () => {
       beforeEach(function() {
         this.attrs = { name: '', hex: '#36c' };
         this.model.validate(this.attrs);
@@ -20,7 +20,7 @@ describe('colors/model', function() {
       });
     });
 
-    describe('when missing "hex" field', function() {
+    describe('when missing "hex" field', () => {
       beforeEach(function() {
         this.attrs = { name: 'blue', hex: '' };
         this.model.validate(this.attrs);
@@ -31,7 +31,7 @@ describe('colors/model', function() {
       });
     });
 
-    describe('when attributes are valid', function() {
+    describe('when attributes are valid', () => {
       beforeEach(function() {
         this.attrs = { name: 'blue', hex: '#36c' };
         this.model.validate(this.attrs);

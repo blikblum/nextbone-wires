@@ -1,17 +1,17 @@
-describe('application/application', function() {
+describe('application/application', () => {
   beforeEach(function() {
     this.layoutView = { render: stub() };
     this.LayoutView = stub().returns(this.layoutView);
 
     this.Controller = proxyquire('../../src/application/application.js', {
       './layout-view': this.LayoutView,
-      'jquery': global.$
+      jquery: global.$,
     }).default;
 
     this.module = new this.Controller();
   });
 
-  describe('#initialize', function() {
+  describe('#initialize', () => {
     beforeEach(function() {
       this.module.initialize();
     });
