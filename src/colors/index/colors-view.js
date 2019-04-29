@@ -1,10 +1,10 @@
-import _ from 'underscore';
-import { Component, html } from 'component';
-import { Collection, state } from 'nextbone';
-import './paging-bar';
+import _ from 'underscore'
+import { Component, html } from 'component'
+import { Collection, state } from 'nextbone'
+import './paging-bar'
 
 const ColorItem = model => {
-  const { id, hex, name } = model.attributes;
+  const { id, hex, name } = model.attributes
 
   return html`
     <a
@@ -24,33 +24,39 @@ const ColorItem = model => {
         </div>
       </div></a
     >
-  `;
-};
+  `
+}
 
 export default class ColorsView extends Component {
-  initialize(options = {}) {
-    this.state = { start: 0, limit: 20 };
-    this.state.start = (options.page - 1) * this.state.limit;
-    const filtered = this.getFilteredModels();
-    this.filteredCollection = new Collection(filtered);
-    this.listenTo(this.filteredCollection, 'all', this.render);
+  initialize(...args) {
+    super.initialize(...args)
+    this.state = { start: 0, limit: 20 }
+    this.state.start = (this.page - 1) * this.state.limit
+  }
+
+  getFilteredCollection() {
+    if (!this.filteredCollection) {
+      const filtered = this.getFilteredModels()
+      this.filteredCollection = new Collection(filtered)
+    }
+    return this.filteredCollection
   }
 
   getFilteredModels() {
     return _.chain(this.collection.models)
       .drop(this.state.start)
       .take(this.state.limit)
-      .value();
+      .value()
   }
 
   updateState(options) {
-    this.state.start = (options.page - 1) * this.state.limit;
-    const filtered = this.getFilteredModels();
-    this.filteredCollection.reset(filtered);
+    this.state.start = (options.page - 1) * this.state.limit
+    const filtered = this.getFilteredModels()
+    this.filteredCollection.reset(filtered)
   }
 
   render() {
-    const filtered = this.filteredCollection;
+    const filtered = this.getFilteredCollection()
 
     return html`
       <div class="colors colors--index container">
@@ -63,14 +69,14 @@ export default class ColorsView extends Component {
         </div>
         <div class="colors__footer mt-3 d-flex justify-content-center">
           <paging-bar
-            count=${this.collection.length}
-            start=${this.state.start}
-            limit=${this.state.limit}
-          />
+            .count=${this.collection.length}
+            .start=${this.state.start}
+            .limit=${this.state.limit}
+          ></paging-bar>
         </div>
       </div>
-    `;
+    `
   }
 }
 
-customElements.define('colors-view', ColorsView);
+customElements.define('colors-view', ColorsView)

@@ -1,40 +1,41 @@
-import nprogress from 'nprogress';
-import { Component, html } from 'component';
-import { event } from 'nextbone';
-import { formBind } from 'nextbone/formbind';
-import { Radio } from 'nextbone-radio';
-import storage from '../storage';
+import nprogress from 'nprogress'
+import { Component, html } from 'component'
+import { event } from 'nextbone'
+import { formBind } from 'nextbone/formbind'
+import { Radio } from 'nextbone-radio'
+import storage from '../storage'
 
 @formBind
 class BookCreateView extends Component {
   static properties = {
     errors: { type: Object },
-  };
+  }
 
   @event('submit', 'form')
   handleSubmit() {
-    const errors = this.model.validate(this.form);
+    const errors = this.model.validate(this.form)
 
     if (errors) {
-      this.errors = errors;
+      this.errors = errors
     } else {
-      nprogress.start();
+      nprogress.start()
       storage.save(this.model).then(() => {
-        Radio.channel('router').request('transitionTo', 'colors.index');
-      });
+        Radio.channel('router').request('transitionTo', 'colors.index')
+      })
     }
   }
 
   render() {
+    const errors = this.errors
     return html`
       <div class="colors colors--create container">
         <div class="page-header"><h1>Colors: Create</h1></div>
         <form class="colors__form form-horizontal well" role="form">
-          ${this.errors &&
+          ${Boolean(errors) &&
             html`
               <div class="alert alert-warning">
                 <ul>
-                  ${this.errors.map(
+                  ${errors.map(
                     (item, i) =>
                       html`
                         <li>${item}</li>
@@ -52,13 +53,7 @@ class BookCreateView extends Component {
           <div class="form-group">
             <label class="col-sm-1 control-label" for="hex">Hex</label>
             <div class="col-sm-11">
-              <input
-                class="form-control"
-                name="hex"
-                type="text"
-                placeholder="#00f"
-                .value=${this.model.get('hex')}
-              />
+              <input class="form-control" name="hex" type="text" placeholder="#00f" />
             </div>
           </div>
           <div class="form-group">
@@ -68,10 +63,10 @@ class BookCreateView extends Component {
           </div>
         </form>
       </div>
-    `;
+    `
   }
 }
 
-export default BookCreateView;
+export default BookCreateView
 
-customElements.define('book-create-view', BookCreateView);
+customElements.define('book-create-view', BookCreateView)

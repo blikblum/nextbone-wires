@@ -1,54 +1,46 @@
-import nprogress from 'nprogress';
-import { Component, html } from 'component';
-import { Radio } from 'nextbone-radio';
-import _ from 'underscore';
-import { state } from 'nextbone';
-import storage from '../storage';
-import Color from '../model';
+import nprogress from 'nprogress'
+import { Component, html } from 'component'
+import { Radio } from 'nextbone-radio'
+import _ from 'underscore'
+import { state, event } from 'nextbone'
+import storage from '../storage'
+import Color from '../model'
 
 export default class ColorEditView extends Component {
   @state({ copy: true })
-  model = new Color();
+  model = new Color()
 
-  templateContext() {
-    return {
-      errors: this.model.validationError,
-    };
-  }
-
-  events = {
-    'submit form': 'handleSubmit',
-  };
-
+  @event('submit', 'form')
   handleSubmit() {
-    const errors = this.model.validate(this.form);
+    const errors = this.model.validate(this.form)
 
     if (errors) {
-      this.model.validationError = errors;
-      this.render();
+      this.model.validationError = errors
+      this.render()
     } else {
-      nprogress.start();
-      this.model.set(this.form);
+      nprogress.start()
+      this.model.set(this.form)
       storage.save(this.model).then(() => {
-        Radio.channel('router').request('transitionTo', 'colors.show', { colorid: this.model.id });
-      });
+        Radio.channel('router').request('transitionTo', 'colors.show', { colorid: this.model.id })
+      })
     }
   }
 
   hasUnsavedChanges() {
-    return !_.isEqual(Syphon.serialize(this), _.omit(this.model.attributes, 'id', 'active'));
+    return !_.isEqual(Syphon.serialize(this), _.omit(this.model.attributes, 'id', 'active'))
   }
 
   render() {
+    const errors = this.model.validationError
     return html`
-      <div className="colors colors--edit container">
-        <div className="page-header"><h1>Colors: Edit</h1></div>
-        <form className="colors__form form-horizontal well" role="form">
-          ${this.errors &&
+      <div class="colors colors--edit container">
+        <div class="page-header"><h1>Colors: Edit</h1></div>
+        <form class="colors__form form-horizontal well" role="form">
+          ${errors &&
             html`
-              <div className="alert alert-warning">
+              <div class="alert alert-warning">
                 <ul>
-                  ${this.errors.map(
+                  ${errors.map(
                     (item, i) =>
                       html`
                         <li>${item}</li>
@@ -57,27 +49,27 @@ export default class ColorEditView extends Component {
                 </ul>
               </div>
             `}
-          <div className="form-group">
-            <label className="col-sm-1 control-label" htmlFor="name">Name</label>
-            <div className="col-sm-11">
-              <input className="form-control" name="name" type="text" placeholder="blue" />
+          <div class="form-group">
+            <label class="col-sm-1 control-label" for="name">Name</label>
+            <div class="col-sm-11">
+              <input class="form-control" name="name" type="text" placeholder="blue" />
             </div>
           </div>
-          <div className="form-group">
-            <label className="col-sm-1 control-label" htmlFor="hex">Hex</label>
-            <div className="col-sm-11">
-              <input className="form-control" name="hex" type="text" placeholder="#00f" />
+          <div class="form-group">
+            <label class="col-sm-1 control-label" for="hex">Hex</label>
+            <div class="col-sm-11">
+              <input class="form-control" name="hex" type="text" placeholder="#00f" />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-offset-1 col-sm-11">
-              <button type="submit" className="btn btn-default">Submit</button>
+          <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-11">
+              <button type="submit" class="btn btn-default">Submit</button>
             </div>
           </div>
         </form>
       </div>
-    `;
+    `
   }
 }
 
-customElements.define('color-edit-view', ColorEditView);
+customElements.define('color-edit-view', ColorEditView)
