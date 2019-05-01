@@ -43,6 +43,9 @@ const router = new Router({ outlet: 'body', log: true, logError: true })
 
 // proxy router events through a Radio channel
 const routerChannel = Radio.channel('router')
+routerChannel.reply('transitionTo', (...args) => {
+  router.transitionTo(...args)
+})
 
 router.on('all', (...args) => {
   routerChannel.trigger(...args)

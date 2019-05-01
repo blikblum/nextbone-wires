@@ -1,61 +1,53 @@
-import { Component } from 'component';
-import nprogress from 'nprogress';
-import { Radio } from 'nextbone-radio';
-import ModalService from '../../modal/service';
-import FlashesService from '../../flashes/service';
+import { Component, html } from 'component'
+import nprogress from 'nprogress'
+import { Radio } from 'nextbone-radio'
+import ModalService from '../../modal/service'
+import FlashesService from '../../flashes/service'
+import { state, event } from 'nextbone'
 
 export default class ColorView extends Component {
-  initialize(options = {}) {
-    this.model = options.model;
-  }
+  @state
+  model
 
-  templateContext() {
-    return {
-      errors: this.model.validationError,
-    };
-  }
-
-  events = {
-    'click .colors__toggle': 'handleToggle',
-    'click .colors__destroy': 'handleDestroy',
-  };
-
+  @event('click', '.colors__toggle')
   handleToggle() {
-    this.model.set('active', !this.model.get('active'));
-    this.model.save().fail(() => this.handleToggleFailure());
+    this.model.set('active', !this.model.get('active'))
+    this.model.save().catch(() => this.handleToggleFailure())
   }
 
   handleToggleFailure() {
-    this.model.set('active', this.model.previous('active'));
+    this.model.set('active', this.model.previous('active'))
   }
 
+  @event('click', '.colors__destroy')
   handleDestroy() {
-    ModalService.request('confirm', {
+    ModalService.confirm({
       title: 'Confirm Color Destruction',
       text: `Are you sure you want to destroy ${this.model.get('name')}?`,
     }).then(confirmed => {
       if (!confirmed) {
-        return;
+        return
       }
 
-      nprogress.start();
+      nprogress.start()
 
-      return this.model.destroy({ wait: true }).then(() => this.handleDestroySuccess());
-    });
+      return this.model.destroy({ wait: true }).then(() => this.handleDestroySuccess())
+    })
   }
 
   handleDestroySuccess() {
-    Radio.channel('router').request('transitionTo', 'colors.index');
+    Radio.channel('router').request('transitionTo', 'colors.index')
     FlashesService.request('add', {
       timeout: 5000,
       type: 'info',
       title: `It's gone!`,
       body: `You have deleted ${this.model.get('name')}.`,
-    });
+    })
   }
 
   render() {
-    html`
+    const { id, hex, active, name } = this.model.attributes
+    return html`
       <div class="colors colors--show container">
         <div class="page-header">
           <div class="btn-toolbar float-right mt-2" role="toolbar">
@@ -65,7 +57,7 @@ export default class ColorView extends Component {
             <div class="btn-group">
               <button class="colors__toggle btn btn-light">
                 ${active ? 'Deactivate' : 'Activate'}</button
-              ><a href=${`#colors/${  id  }/edit`} class="btn btn-light">Edit</a>
+              ><a href=${`#colors/${id}/edit`} class="btn btn-light">Edit</a>
             </div>
           </div>
           <h1>Colors: Show</h1>
@@ -73,7 +65,7 @@ export default class ColorView extends Component {
         <div class="row">
           <div class="col-md-3">
             <div class="thumbnail">
-              <div class="colors__thumbnail" style=${`background-color: ${  hex}`} />
+              <div class="colors__thumbnail" style=${`background-color: ${hex}`}></div>
             </div>
           </div>
           <div class="col-md-9">
@@ -94,8 +86,8 @@ export default class ColorView extends Component {
           </div>
         </div>
       </div>
-    `;
+    `
   }
 }
 
-customElements.define('color-view', ColorView);
+customElements.define('color-view', ColorView)

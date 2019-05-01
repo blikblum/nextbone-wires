@@ -1,37 +1,42 @@
 import nprogress from 'nprogress'
-import { Component, html } from 'component'
+import { Component, html, property } from 'component'
 import { Radio } from 'nextbone-radio'
 import _ from 'underscore'
 import { state, event } from 'nextbone'
 import storage from '../storage'
 import Color from '../model'
+import { formBind } from 'nextbone/formbind'
 
-export default class ColorEditView extends Component {
+@formBind
+class ColorEditView extends Component {
   @state({ copy: true })
   model = new Color()
 
+  @property({ type: Object })
+  errors
+
   @event('submit', 'form')
   handleSubmit() {
-    const errors = this.model.validate(this.form)
-
-    if (errors) {
-      this.model.validationError = errors
-      this.render()
-    } else {
-      nprogress.start()
-      this.model.set(this.form)
-      storage.save(this.model).then(() => {
-        Radio.channel('router').request('transitionTo', 'colors.show', { colorid: this.model.id })
-      })
+    if (!this.model.isValid()) {
+      this.errors = this.model.validationError
+      return
     }
+
+    nprogress.start()
+    storage.save(this.model).then(() => {
+      Radio.channel('router').request('transitionTo', 'colors.show', { colorid: this.model.id })
+    })
   }
 
-  hasUnsavedChanges() {
-    return !_.isEqual(Syphon.serialize(this), _.omit(this.model.attributes, 'id', 'active'))
+  hasUnsavedChanges(pristine) {
+    return !_.isEqual(
+      _.omit(pristine.attributes, 'id', 'active'),
+      _.omit(this.model.attributes, 'id', 'active'),
+    )
   }
 
   render() {
-    const errors = this.model.validationError
+    const errors = this.errors
     return html`
       <div class="colors colors--edit container">
         <div class="page-header"><h1>Colors: Edit</h1></div>
@@ -52,13 +57,25 @@ export default class ColorEditView extends Component {
           <div class="form-group">
             <label class="col-sm-1 control-label" for="name">Name</label>
             <div class="col-sm-11">
-              <input class="form-control" name="name" type="text" placeholder="blue" />
+              <input
+                class="form-control"
+                name="name"
+                type="text"
+                placeholder="blue"
+                .value=${this.model.get('name')}
+              />
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-1 control-label" for="hex">Hex</label>
             <div class="col-sm-11">
-              <input class="form-control" name="hex" type="text" placeholder="#00f" />
+              <input
+                class="form-control"
+                name="hex"
+                type="text"
+                placeholder="#00f"
+                .value=${this.model.get('hex')}
+              />
             </div>
           </div>
           <div class="form-group">
@@ -71,5 +88,7 @@ export default class ColorEditView extends Component {
     `
   }
 }
+
+export default ColorEditView
 
 customElements.define('color-edit-view', ColorEditView)

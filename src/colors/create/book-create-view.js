@@ -31,29 +31,42 @@ class BookCreateView extends Component {
       <div class="colors colors--create container">
         <div class="page-header"><h1>Colors: Create</h1></div>
         <form class="colors__form form-horizontal well" role="form">
-          ${Boolean(errors) &&
-            html`
-              <div class="alert alert-warning">
-                <ul>
-                  ${errors.map(
-                    (item, i) =>
-                      html`
-                        <li>${item}</li>
-                      `,
-                  )}
-                </ul>
-              </div>
-            `}
+          ${errors
+            ? html`
+                <div class="alert alert-warning">
+                  <ul>
+                    ${errors.map(
+                      (item, i) =>
+                        html`
+                          <li>${item}</li>
+                        `,
+                    )}
+                  </ul>
+                </div>
+              `
+            : undefined}
           <div class="form-group">
             <label class="col-sm-1 control-label" for="name">Name</label>
             <div class="col-sm-11">
-              <input class="form-control" name="name" type="text" placeholder="blue" />
+              <input
+                class="form-control"
+                name="name"
+                type="text"
+                placeholder="blue"
+                .value=${this.model.get('name') || null}
+              />
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-1 control-label" for="hex">Hex</label>
             <div class="col-sm-11">
-              <input class="form-control" name="hex" type="text" placeholder="#00f" />
+              <input
+                class="form-control"
+                name="hex"
+                type="text"
+                placeholder="#00f"
+                .value=${this.model.get('hex') || null}
+              />
             </div>
           </div>
           <div class="form-group">

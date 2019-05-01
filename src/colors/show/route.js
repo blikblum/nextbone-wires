@@ -1,25 +1,20 @@
-import { Route } from 'nextbone-routing';
-import View from './view';
-import storage from '../storage';
+import { Route, elProperty } from 'nextbone-routing'
+import ColorView from './color-view'
+import storage from '../storage'
 
 export default class extends Route {
-  activate(transition) {
-    return storage.find(+transition.params.colorid).then(model => {
-      this.model = model;
-    });
+  static component = ColorView
+
+  static providedContexts = {
+    colorModel: { property: 'model' },
   }
 
-  static contextRequests = {
-    colorModel() {
-      return this.model;
-    },
-  };
+  @elProperty
+  model
 
-  static component = View;
-
-  viewOptions() {
-    return {
-      model: this.model,
-    };
+  activate(transition) {
+    return storage.find(+transition.params.colorid).then(model => {
+      this.model = model
+    })
   }
 }

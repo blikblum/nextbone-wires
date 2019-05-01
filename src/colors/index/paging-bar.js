@@ -1,6 +1,6 @@
-import { Component } from 'component';
-import _ from 'underscore';
-import { html } from 'lit-html';
+import { Component } from 'component'
+import _ from 'underscore'
+import { html } from 'lit-html'
 
 class PagingBar extends Component {
   static get properties() {
@@ -8,26 +8,26 @@ class PagingBar extends Component {
       count: { type: Number },
       start: { type: Number },
       limit: { type: Number },
-    };
+    }
   }
 
   calculateValues() {
-    const total = Math.ceil(this.props.count / this.props.limit);
-    const current = Math.ceil(this.props.start / this.props.limit) + 1;
+    const total = Math.ceil(this.count / this.limit)
+    const current = Math.ceil(this.start / this.limit) + 1
 
     const pages = _.times(total, index => ({
       current: index + 1 === current,
       page: index + 1,
-    }));
+    }))
 
-    const prev = current - 1 > 0 ? current - 1 : false;
-    const next = current < total ? current + 1 : false;
+    const prev = current - 1 > 0 ? current - 1 : false
+    const next = current < total ? current + 1 : false
 
-    return { total, current, pages, prev, next };
+    return { total, current, pages, prev, next }
   }
 
   render() {
-    const { pages, prev, next } = calculateValues();
+    const { pages, prev, next } = this.calculateValues()
     return html`
       <div class="text-center">
         <ul class="pagination">
@@ -67,8 +67,8 @@ class PagingBar extends Component {
               `}
         </ul>
       </div>
-    `;
+    `
   }
 }
 
-customElements.define('paging-bar', PagingBar);
+customElements.define('paging-bar', PagingBar)

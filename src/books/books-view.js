@@ -1,5 +1,5 @@
 import { Component, html } from 'component'
-import { Region } from 'nextbone-routing'
+import { Region, routerLinks } from 'nextbone-routing'
 
 // inspired by https://3dtransforms.desandro.com/card-flip
 // todo: disable or replace animation on small screns
@@ -24,7 +24,8 @@ class FlipRegion extends Region {
   }
 }
 
-export default class BooksView extends Component {
+@routerLinks
+class BooksView extends Component {
   static outlet = '.books__viewer'
 
   render() {
@@ -36,7 +37,7 @@ export default class BooksView extends Component {
             <div class="books__viewer flip-card"></div>
           </div>
           <div class="books__library col-md-3 order-2 order-md-1">
-            <div class="list-group">
+            <div class="list-group" routerlinks>
               ${this.collection.map(book => {
                 const { title, year, author, id } = book.attributes
                 return html`
@@ -57,5 +58,7 @@ export default class BooksView extends Component {
     `
   }
 }
+
+export default BooksView
 
 customElements.define('books-view', BooksView)

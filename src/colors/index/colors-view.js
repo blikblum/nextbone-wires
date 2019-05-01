@@ -1,5 +1,5 @@
 import _ from 'underscore'
-import { Component, html } from 'component'
+import { Component, html, property } from 'component'
 import { Collection, state } from 'nextbone'
 import './paging-bar'
 
@@ -12,12 +12,7 @@ const ColorItem = model => {
       href=${`#colors/${id}`}
     >
       <div class="d-flex w-100 justify-content-start">
-        <span
-          class="colors__swatch mt-2"
-          style=${{
-            'background-color': hex,
-          }}
-        />
+        <span class="colors__swatch mt-2" style=${`background-color: ${hex}`}></span>
         <div>
           <h5>${name}</h5>
           <p class="mb-1">${hex}</p>
@@ -28,11 +23,10 @@ const ColorItem = model => {
 }
 
 export default class ColorsView extends Component {
-  initialize(...args) {
-    super.initialize(...args)
-    this.state = { start: 0, limit: 20 }
-    this.state.start = (this.page - 1) * this.state.limit
-  }
+  @property({ type: Number })
+  page = 1
+
+  state = { start: 0, limit: 20 }
 
   getFilteredCollection() {
     if (!this.filteredCollection) {
@@ -49,10 +43,21 @@ export default class ColorsView extends Component {
       .value()
   }
 
-  updateState(options) {
-    this.state.start = (options.page - 1) * this.state.limit
+  updateState() {
+    this.state.start = (this.page - 1) * this.state.limit
     const filtered = this.getFilteredModels()
-    this.filteredCollection.reset(filtered)
+    if (!this.filteredCollection) {
+      this.filteredCollection = new Collection(filtered)
+    } else {
+      this.filteredCollection.reset(filtered)
+    }
+  }
+
+  shouldUpdate(changedProperties) {
+    if (changedProperties.has('page')) {
+      this.updateState()
+    }
+    return super.shouldUpdate(changedProperties)
   }
 
   render() {
