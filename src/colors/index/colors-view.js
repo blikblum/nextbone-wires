@@ -1,6 +1,5 @@
-import _ from 'underscore'
 import { Component, html, property } from 'component'
-import { Collection, state } from 'nextbone'
+import { state } from 'nextbone'
 import { VirtualCollection } from 'nextbone/virtualcollection'
 import './paging-bar'
 
@@ -32,13 +31,15 @@ export default class ColorsView extends Component {
 
   filter = { start: 0, limit: 20 }
 
+  filterCallback = (color, index) => {
+    const lastIndex = this.filter.start + this.filter.limit
+    return index >= this.filter.start && index < lastIndex
+  }
+
   getFilteredColors() {
     if (!this.filteredColors) {
       this.filteredColors = new VirtualCollection(this.colors, {
-        filter: (color, index) => {
-          const lastIndex = this.filter.start + this.filter.limit
-          return index >= this.filter.start && index <= lastIndex
-        },
+        filter: this.filterCallback,
       })
     }
     return this.filteredColors
@@ -49,7 +50,7 @@ export default class ColorsView extends Component {
     if (!this.filteredColors) {
       this.getFilteredColors()
     } else {
-      this.filteredColors.trigger('filter')
+      this.filteredColors.updateFilter(this.filterCallback)
     }
   }
 
