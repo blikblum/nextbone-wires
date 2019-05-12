@@ -1,6 +1,7 @@
 import _ from 'underscore'
 import { Component, html, property } from 'component'
 import { Collection, state } from 'nextbone'
+import { VirtualCollection } from 'nextbone/virtualcollection'
 import './paging-bar'
 
 const ColorItem = model => {
@@ -26,30 +27,29 @@ export default class ColorsView extends Component {
   @property({ type: Number })
   page = 1
 
-  state = { start: 0, limit: 20 }
+  @state
+  filteredColors
 
-  getFilteredCollection() {
-    if (!this.filteredCollection) {
-      const filtered = this.getFilteredModels()
-      this.filteredCollection = new Collection(filtered)
+  filter = { start: 0, limit: 20 }
+
+  getFilteredColors() {
+    if (!this.filteredColors) {
+      this.filteredColors = new VirtualCollection(this.colors, {
+        filter: (color, index) => {
+          const lastIndex = this.filter.start + this.filter.limit
+          return index >= this.filter.start && index <= lastIndex
+        },
+      })
     }
-    return this.filteredCollection
-  }
-
-  getFilteredModels() {
-    return _.chain(this.collection.models)
-      .drop(this.state.start)
-      .take(this.state.limit)
-      .value()
+    return this.filteredColors
   }
 
   updateState() {
-    this.state.start = (this.page - 1) * this.state.limit
-    const filtered = this.getFilteredModels()
-    if (!this.filteredCollection) {
-      this.filteredCollection = new Collection(filtered)
+    this.filter.start = (this.page - 1) * this.filter.limit
+    if (!this.filteredColors) {
+      this.getFilteredColors()
     } else {
-      this.filteredCollection.reset(filtered)
+      this.filteredColors.trigger('filter')
     }
   }
 
@@ -61,7 +61,7 @@ export default class ColorsView extends Component {
   }
 
   render() {
-    const filtered = this.getFilteredCollection()
+    const filtered = this.getFilteredColors()
 
     return html`
       <div class="colors colors--index container">
@@ -74,9 +74,9 @@ export default class ColorsView extends Component {
         </div>
         <div class="colors__footer mt-3 d-flex justify-content-center">
           <paging-bar
-            .count=${this.collection.length}
-            .start=${this.state.start}
-            .limit=${this.state.limit}
+            .count=${this.colors.length}
+            .start=${this.filter.start}
+            .limit=${this.filter.limit}
           ></paging-bar>
         </div>
       </div>
