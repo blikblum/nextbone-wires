@@ -1,41 +1,42 @@
 import { Route, Region } from 'nextbone-routing'
 import HeaderService from '../header/service'
+import $ from 'jquery'
 
 // based on https://tympanus.net/Development/PageTransitions/
 
 class PageTransitionRegion extends Region {
-  initialize(options) {
-    this.animation = options.animation
-  }
+  attachEl(el) {
+    const $el = $(el)
+    const $targetEl = $(this.targetEl)
+    const animationClass = this.inClass
 
-  attachHtml(view) {
-    const hasAnimation = !!this.animation && !!this.animation.inClass
-
-    this.$el.append(view.el)
-    view.$el.addClass('pt-page pt-page-current')
-    if (hasAnimation && this.isSwappingView()) {
-      this.$el.css('overflow', 'hidden')
-      view.$el.addClass(this.animation.inClass).one('animationend', () => {
-        this.$el.css('overflow', '')
-        view.$el.removeClass(this.animation.inClass)
-        view.triggerMethod('page:transition:end')
+    super.attachEl(el)
+    $el.addClass('pt-page pt-page-current')
+    if (animationClass && this.isSwappingEl) {
+      $targetEl.css('overflow', 'hidden')
+      $el.addClass(animationClass).one('animationend', () => {
+        $targetEl.css('overflow', '')
+        $el.removeClass(animationClass)
+        el.dispatchEvent(new CustomEvent('page-transition-end'))
       })
     } else {
-      view.triggerMethod('page:transition:end')
+      el.dispatchEvent(new CustomEvent('page-transition-end'))
     }
   }
 
-  removeView(view) {
-    const hasAnimation = !!this.animation && !!this.animation.outClass
+  detachEl(el) {
+    const $el = $(el)
+    const $targetEl = $(this.targetEl)
+    const animationClass = this.outClass
 
-    if (hasAnimation && this.isSwappingView()) {
-      this.$el.css('overflow', 'hidden')
-      view.$el.addClass(this.animation.outClass).one('animationend', () => {
-        this.$el.css('overflow', '')
-        view.destroy()
+    if (animationClass && this.isSwappingEl) {
+      $targetEl.css('overflow', 'hidden')
+      $el.addClass(animationClass).one('animationend', () => {
+        $targetEl.css('overflow', '')
+        super.detachEl(el)
       })
     } else {
-      view.destroy()
+      super.detachEl(el)
     }
   }
 }
@@ -93,7 +94,7 @@ export default class extends Route {
 
     const outlet =
       this.outletRegion ||
-      (this.outletRegion = new Region(this.el.querySelector('.application__content')))
+      (this.outletRegion = new PageTransitionRegion(this.el.querySelector('.application__content')))
     outlet.inClass = inClass
     outlet.outClass = outClass
 

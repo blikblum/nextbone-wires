@@ -1,5 +1,6 @@
 import { Component, html } from 'component'
 import $ from 'jquery'
+import { event } from 'nextbone'
 
 export default class IndexView extends Component {
   constructor() {
@@ -7,11 +8,9 @@ export default class IndexView extends Component {
     this.classList.add('index')
   }
 
-  firstUpdated() {
-    this.onPageTransitionEnd()
-  }
-
-  onPageTransitionEnd() {
+  @event('page-transition-end')
+  async onPageTransitionEnd() {
+    await this.updateComplete
     $(this)
       .find('.index__billboard')
       .removeClass('d-none')

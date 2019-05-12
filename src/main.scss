@@ -1,20 +1,19 @@
-@import "~bootstrap/scss/bootstrap";
-@import "~nprogress/nprogress";
+@import '~bootstrap/scss/bootstrap';
+@import '~nprogress/nprogress';
 
-@import "application/styles";
-@import "application/page-transitions";
-@import "books/styles";
-@import "books/flip-animation";
-@import "colors/styles";
-@import "flashes/styles";
-@import "header/styles";
-@import "index/styles";
+@import 'application/styles';
+@import 'application/page-transitions';
+@import 'books/styles';
+@import 'books/flip-animation';
+@import 'colors/styles';
+@import 'flashes/styles';
+@import 'header/styles';
+@import 'index/styles';
 
 html,
 body,
-application-view {
+.application {
   position: relative;
   height: 100%;
   width: 100%;
 }
-

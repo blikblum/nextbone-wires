@@ -1,29 +1,6 @@
 import { Component, html } from 'component'
 import { Region, routerLinks } from 'nextbone-routing'
 
-// inspired by https://3dtransforms.desandro.com/card-flip
-// todo: disable or replace animation on small screns
-class FlipRegion extends Region {
-  attachHtml(view) {
-    view.$el.addClass('flip-card__face').appendTo(this.$el)
-    if (this.isSwappingView()) {
-      const isFlipped = this.$el.hasClass('is-flipped')
-      view.$el.addClass(`flip-card__face--${isFlipped ? 'front' : 'back'}`)
-      this.$el.toggleClass('is-flipped')
-    }
-  }
-
-  removeView(view) {
-    if (this.isSwappingView()) {
-      this.$el.one('transitionend', () => {
-        view.destroy()
-      })
-    } else {
-      view.destroy()
-    }
-  }
-}
-
 @routerLinks
 class BooksView extends Component {
   static outlet = '.books__viewer'
