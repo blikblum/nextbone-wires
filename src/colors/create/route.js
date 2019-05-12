@@ -1,6 +1,5 @@
 import { Route, elProperty } from 'nextbone-routing'
-import BookCreateView from './book-create-view'
-import storage from '../storage'
+import BookCreateView from './color-create-view'
 import Color from '../model'
 
 export default class extends Route {
@@ -14,8 +13,5 @@ export default class extends Route {
 
   activate() {
     this.model = new Color()
-    return storage.findAll({ ajaxSync: true }).then(collection => {
-      this.collection = collection
-    })
   }
 }

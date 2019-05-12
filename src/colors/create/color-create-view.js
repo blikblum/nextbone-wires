@@ -12,17 +12,17 @@ class BookCreateView extends Component {
   }
 
   @event('submit', 'form')
-  handleSubmit() {
-    const errors = this.model.validate(this.form)
-
-    if (errors) {
-      this.errors = errors
-    } else {
-      nprogress.start()
-      storage.save(this.model).then(() => {
-        Radio.channel('router').request('transitionTo', 'colors.index')
-      })
+  handleSubmit(e) {
+    e.preventDefault()
+    if (!this.model.isValid()) {
+      this.errors = this.model.validationError
+      return
     }
+
+    nprogress.start()
+    storage.save(this.model).then(() => {
+      Radio.channel('router').request('transitionTo', 'colors.show', { colorid: this.model.id })
+    })
   }
 
   render() {

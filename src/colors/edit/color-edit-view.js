@@ -16,7 +16,8 @@ class ColorEditView extends Component {
   errors
 
   @event('submit', 'form')
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault()
     if (!this.model.isValid()) {
       this.errors = this.model.validationError
       return

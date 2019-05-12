@@ -13,7 +13,7 @@ export default class extends Route {
   model
 
   activate(transition) {
-    return storage.find(+transition.params.colorid).then(model => {
+    return storage.find(transition.params.colorid).then(model => {
       this.model = model
     })
   }
