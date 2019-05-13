@@ -1,9 +1,6 @@
-import nprogress from 'nprogress'
 import { Component, html, property } from 'component'
-import { Radio } from 'nextbone-radio'
 import _ from 'underscore'
 import { state, event } from 'nextbone'
-import storage from '../storage'
 import Color from '../model'
 import { formBind } from 'nextbone/formbind'
 
@@ -22,11 +19,7 @@ class ColorEditView extends Component {
       this.errors = this.model.validationError
       return
     }
-
-    nprogress.start()
-    storage.save(this.model).then(() => {
-      Radio.channel('router').request('transitionTo', 'colors.show', { colorid: this.model.id })
-    })
+    this.trigger('save:color', this.model)
   }
 
   hasUnsavedChanges(pristine) {

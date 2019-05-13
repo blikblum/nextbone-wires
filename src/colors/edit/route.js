@@ -1,6 +1,8 @@
-import { Route, elProperty } from 'nextbone-routing'
+import { Route, elProperty, elEvent } from 'nextbone-routing'
 import View from './color-edit-view'
 import ModalService from '../../modal/service'
+import storage from '../storage'
+import nprogress from 'nprogress'
 
 export default class extends Route {
   static component = View
@@ -25,5 +27,13 @@ export default class extends Route {
         }
       })
     }
+  }
+
+  @elEvent('save:color', { dom: false })
+  saveColor(model) {
+    nprogress.start()
+    storage.save(model).then(() => {
+      this.$router.transitionTo('colors.show', { colorid: model.id })
+    })
   }
 }
