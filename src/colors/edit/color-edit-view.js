@@ -30,31 +30,36 @@ class ColorEditView extends Component {
   }
 
   hasUnsavedChanges(pristine) {
-    return !_.isEqual(
-      _.omit(pristine.attributes, 'id', 'active'),
-      _.omit(this.model.attributes, 'id', 'active'),
+    return (
+      !(pristine.isNew() && !this.model.isNew()) &&
+      !_.isEqual(
+        _.omit(pristine.attributes, 'id', 'active'),
+        _.omit(this.model.attributes, 'id', 'active'),
+      )
     )
   }
 
   render() {
     const errors = this.errors
+    const isNew = this.model.isNew()
     return html`
       <div class="colors colors--edit container">
-        <div class="page-header"><h1>Colors: Edit</h1></div>
+        <div class="page-header"><h1>Colors: ${isNew ? 'Create' : 'Edit'}</h1></div>
         <form class="colors__form form-horizontal well" role="form">
-          ${errors &&
-            html`
-              <div class="alert alert-warning">
-                <ul>
-                  ${errors.map(
-                    (item, i) =>
-                      html`
-                        <li>${item}</li>
-                      `,
-                  )}
-                </ul>
-              </div>
-            `}
+          ${errors
+            ? html`
+                <div class="alert alert-warning">
+                  <ul>
+                    ${errors.map(
+                      (item, i) =>
+                        html`
+                          <li>${item}</li>
+                        `,
+                    )}
+                  </ul>
+                </div>
+              `
+            : undefined}
           <div class="form-group">
             <label class="col-sm-1 control-label" for="name">Name</label>
             <div class="col-sm-11">
@@ -63,7 +68,7 @@ class ColorEditView extends Component {
                 name="name"
                 type="text"
                 placeholder="blue"
-                .value=${this.model.get('name')}
+                .value=${this.model.get('name') || null}
               />
             </div>
           </div>
@@ -75,7 +80,7 @@ class ColorEditView extends Component {
                 name="hex"
                 type="text"
                 placeholder="#00f"
-                .value=${this.model.get('hex')}
+                .value=${this.model.get('hex') || null}
               />
             </div>
           </div>

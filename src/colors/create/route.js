@@ -1,16 +1,8 @@
-import { Route, elProperty } from 'nextbone-routing'
-import BookCreateView from './color-create-view'
 import Color from '../model'
+import ColorEditRoute from '../edit/route'
 
-export default class extends Route {
-  static component = BookCreateView
 
-  @elProperty
-  model
-
-  @elProperty
-  collection
-
+export default class extends ColorEditRoute {
   activate() {
     this.model = new Color()
   }
