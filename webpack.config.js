@@ -1,7 +1,9 @@
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-var CleanPlugin = require('clean-webpack-plugin')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+const CleanPlugin = require('clean-webpack-plugin')
+const { WebpackPluginServe } = require('webpack-plugin-serve')
+const argv = require('webpack-nano/argv')
 
 var DIST_DIR = 'dist'
 
@@ -19,59 +21,73 @@ var plugins = [
   }),
 ]
 
-module.exports = function(env) {
-  var isProd = env.mode === 'production'
+const { mode = 'production' } = argv
 
-  if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
+const isProd = mode === 'production'
 
-  return {
-    entry: __dirname + '/src/main.js',
-    output: {
-      path: __dirname + '/dist',
-      filename: 'bundle.js',
-    },
-    devtool: 'source-map',
-    mode: isProd ? 'production' : 'development',
-    plugins: plugins,
-    resolve: {
-      modules: [path.resolve(__dirname, './src/common'), 'node_modules'],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.(js)$/,
-          include: [path.resolve('src')],
-          use: [
-            {
-              loader: 'babel-loader',
-            },
-          ],
-        },
-        {
-          test: /\.css$/,
-          use: [MiniCSSExtractPlugin.loader, 'css-loader'],
-        },
-        {
-          test: /\.(sass|scss)$/,
-          use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader'],
-        },
-        {
-          test: /\.(woff|woff2)$/,
-          loader: 'url-loader?limit=10000&mimetype=application/font-woff',
-        },
-        {
-          test: /\.ttf$/,
-          loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
-        },
-        {
-          test: /\.eot$/,
-          loader: 'file-loader',
-        },
-        {
-          test: /\.svg$/,
-          loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
-        },
-      ],
-    },
-  }
+if (isProd) {
+  plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
+} else {
+  // dev
+  plugins.push(
+    new WebpackPluginServe({
+      host: 'localhost',
+      port: '8080',
+      static: ['.', path.resolve(__dirname, DIST_DIR)],
+      liveReload: true,
+      hmr: false,
+    }),
+  )
+}
+
+module.exports = {
+  entry: __dirname + '/src/main.js',
+  output: {
+    path: __dirname + '/dist',
+    filename: 'bundle.js',
+  },
+  devtool: 'source-map',
+  mode: isProd ? 'production' : 'development',
+  watch: !isProd,
+  plugins: plugins,
+  resolve: {
+    modules: [path.resolve(__dirname, './src/common'), 'node_modules'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        include: [path.resolve('src')],
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCSSExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.(sass|scss)$/,
+        use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+      },
+      {
+        test: /\.ttf$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+      },
+      {
+        test: /\.eot$/,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.svg$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      },
+    ],
+  },
 }
