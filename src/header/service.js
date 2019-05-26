@@ -1,7 +1,7 @@
-import { Service } from 'nextbone-radio';
-import { Collection } from 'nextbone';
-import { Region } from 'nextbone-routing';
-import View from './header-view';
+import { Service } from 'nextbone-radio'
+import { Collection } from 'nextbone'
+import { Region } from 'nextbone/dom-utils'
+import View from './header-view'
 
 class HeaderService extends Service {
   static requests = {
@@ -9,47 +9,47 @@ class HeaderService extends Service {
     remove: 'remove',
     activate: 'activate',
     getItems: 'getItems',
-  };
+  }
 
   setup(options = {}) {
-    this.container = options.container;
+    this.container = options.container
   }
 
   start() {
-    const { container } = this;
+    const { container } = this
     if (container instanceof Region) {
-      this.containerRegion = container;
+      this.containerRegion = container
     } else if (container instanceof HTMLElement) {
-      this.containerRegion = new Region(container);
+      this.containerRegion = new Region(container)
     } else {
-      this.containerRegion = new Region(document.querySelector(container));
+      this.containerRegion = new Region(document.querySelector(container))
     }
-    this.collection = new Collection();
-    this.el = new View();
-    this.el.collection = this.collection;
-    this.containerRegion.show(this.el);
+    this.collection = new Collection()
+    this.el = new View()
+    this.el.collection = this.collection
+    this.containerRegion.show(this.el)
   }
 
   add(model) {
-    this.collection.add(model);
+    this.collection.add(model)
   }
 
   remove(model) {
-    model = this.collection.findWhere(model);
-    this.collection.remove(model);
+    model = this.collection.findWhere(model)
+    this.collection.remove(model)
   }
 
   activate(model) {
-    this.collection.invoke('set', 'active', false);
-    model = this.collection.findWhere(model);
+    this.collection.invoke('set', 'active', false)
+    model = this.collection.findWhere(model)
     if (model) {
-      model.set('active', true);
+      model.set('active', true)
     }
   }
 
   getItems() {
-    return this.collection;
+    return this.collection
   }
 }
 
-export default new HeaderService();
+export default new HeaderService()

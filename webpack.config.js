@@ -1,9 +1,9 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCSSExtractPlugin = require('mini-css-extract-plugin');
-var CleanPlugin = require('clean-webpack-plugin');
+var path = require('path')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+var CleanPlugin = require('clean-webpack-plugin')
 
-var DIST_DIR = 'dist';
+var DIST_DIR = 'dist'
 
 var plugins = [
   new HtmlWebpackPlugin({
@@ -17,12 +17,12 @@ var plugins = [
     filename: '[name].css',
     chunkFilename: '[id].css',
   }),
-];
+]
 
 module.exports = function(env) {
-  var isProd = env.mode === 'production';
+  var isProd = env.mode === 'production'
 
-  if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']));
+  if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
 
   return {
     entry: __dirname + '/src/main.js',
@@ -73,5 +73,5 @@ module.exports = function(env) {
         },
       ],
     },
-  };
-};
+  }
+}

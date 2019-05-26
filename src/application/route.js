@@ -1,4 +1,5 @@
-import { Route, Region } from 'nextbone-routing'
+import { Region } from 'nextbone/dom-utils'
+import { Route } from 'nextbone-routing'
 import HeaderService from '../header/service'
 import $ from 'jquery'
 
