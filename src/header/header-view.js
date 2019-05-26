@@ -1,10 +1,13 @@
 import _ from 'underscore'
 import { Component, html } from 'component'
 import { routerLinks } from 'nextbone-routing'
-import { event } from 'nextbone'
+import { event, state } from 'nextbone'
 
 @routerLinks
 class HeaderView extends Component {
+  @state
+  collection
+
   templateContext() {
     return {
       primaryItems: this.serializeWhere({ type: 'primary' }),
@@ -47,7 +50,7 @@ class HeaderView extends Component {
                 `,
             )}
           </ul>
-          <ul class="nav navbar-nav navbar-right routerlinks">
+          <ul class="nav navbar-nav navbar-right" routerlinks>
             ${secondaryItems.map(
               (item, i) =>
                 html`
