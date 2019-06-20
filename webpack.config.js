@@ -5,9 +5,11 @@ const CleanPlugin = require('clean-webpack-plugin')
 const { WebpackPluginServe } = require('webpack-plugin-serve')
 const argv = require('webpack-nano/argv')
 
-var DIST_DIR = 'dist'
+const DIST_DIR = 'dist'
 
-var plugins = [
+const entry = ['./src/main.js']
+
+const plugins = [
   new HtmlWebpackPlugin({
     filename: __dirname + '/dist/index.html',
     template: __dirname + '/src/index.html',
@@ -26,7 +28,7 @@ const { mode = 'production' } = argv
 const isProd = mode === 'production'
 
 if (isProd) {
-  plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
+  plugins.push(new CleanPlugin())
 } else {
   // dev
   plugins.push(
@@ -38,10 +40,13 @@ if (isProd) {
       hmr: false,
     }),
   )
+
+  // webpack-serve client
+  entry.push('webpack-plugin-serve/client')
 }
 
 module.exports = {
-  entry: __dirname + '/src/main.js',
+  entry,
   output: {
     path: __dirname + '/dist',
     filename: 'bundle.js',
@@ -66,11 +71,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCSSExtractPlugin.loader, 'css-loader'],
+        use: [isProd ? MiniCSSExtractPlugin.loader : 'style-loader', 'css-loader'],
       },
       {
         test: /\.(sass|scss)$/,
-        use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [isProd ? MiniCSSExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(woff|woff2)$/,
