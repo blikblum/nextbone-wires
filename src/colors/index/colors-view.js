@@ -1,7 +1,6 @@
 import { Component, html, property } from 'component'
-import { state } from 'nextbone'
-import { VirtualCollection } from 'nextbone/virtualcollection'
 import './paging-bar'
+import { virtualState } from './virtualState'
 
 const ColorItem = model => {
   const { id, hex, name } = model.attributes
@@ -26,31 +25,20 @@ export default class ColorsView extends Component {
   @property({ type: Number })
   page = 1
 
-  @state
-  filteredColors
+  @virtualState({
+    filter: function(color, index) {
+      const lastIndex = this.filter.start + this.filter.limit
+      return index >= this.filter.start && index < lastIndex
+    },
+  })
+  colors
 
   filter = { start: 0, limit: 20 }
 
-  filterCallback = (color, index) => {
-    const lastIndex = this.filter.start + this.filter.limit
-    return index >= this.filter.start && index < lastIndex
-  }
-
-  getFilteredColors() {
-    if (!this.filteredColors) {
-      this.filteredColors = new VirtualCollection(this.colors, {
-        filter: this.filterCallback,
-      })
-    }
-    return this.filteredColors
-  }
-
   updateState() {
     this.filter.start = (this.page - 1) * this.filter.limit
-    if (!this.filteredColors) {
-      this.getFilteredColors()
-    } else {
-      this.filteredColors.updateFilter(this.filterCallback)
+    if (this.colors) {
+      this.colors.updateFilter()
     }
   }
 
@@ -62,7 +50,7 @@ export default class ColorsView extends Component {
   }
 
   render() {
-    const filtered = this.getFilteredColors()
+    const colors = this.colors
 
     return html`
       <div class="colors colors--index container">
@@ -71,11 +59,11 @@ export default class ColorsView extends Component {
           <h1>Colors: Index</h1>
         </div>
         <div class="colors__list">
-          <div class="list-group">${filtered.map(model => ColorItem(model))}</div>
+          <div class="list-group">${colors.map(ColorItem)}</div>
         </div>
         <div class="colors__footer mt-3 d-flex justify-content-center">
           <paging-bar
-            .count=${this.colors.length}
+            .count=${colors ? colors.parent.length : 0}
             .start=${this.filter.start}
             .limit=${this.filter.limit}
           ></paging-bar>
