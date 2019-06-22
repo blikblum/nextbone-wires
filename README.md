@@ -1,37 +1,33 @@
-Marionette Wires - Revisited
-============================
+Nextbone Wires
+==============
 
-An opinionated example application built with Marionette.js. 
+An opinionated example application built with Nextbone. 
 
 ## Overview
 
-This is a fork of [Marionette Wires](https://github.com/thejameskyle/marionette-wires), with the following differences:
+This is based on [Marionette Wires](https://github.com/thejameskyle/marionette-wires)
 
-* Use [Marionette](http://marionettejs.com/) v4 instead of v2
-* Use [marionette.routing](https://github.com/blikblum/marionette.routing) instead of [backbone.routing](https://github.com/thejameskyle/backbone-routing)
-* Use [webpack](http://webpack.github.io/) instead of browserify and gulp
-* No server, just client side
-
-#### New features
+#### Features
 
 * Code splitting of colors routes (open network tab of dev tools and go to colors section)
 * Remember last selected book
 * Live webserver for development (auto reload on source change)
 * Animated page transitions (determined dynamically)
 * Animated book selection change
-* Colors list implemented with [snabbdom](https://github.com/snabbdom/snabbdom) / [JSX](https://github.com/Swizz/snabbdom-pragma)
-* Pagination implemented as a web component (using [skatejs](https://github.com/skatejs/skatejs/))
+* Use of VirtualCollection to implement colors view
+* Pagination implemented as a web component
+* Dialog to prevent exiting color edit form with unsaved changes
  
- Check the [live version](https://blikblum.github.io/marionette-wires-revisited/dist/)
+ Check the [live version](https://blikblum.github.io/nextbone-wires/dist/)
  
- Scaffold a new project with similar setup using [generator-mn](https://github.com/blikblum/generator-mn)
+ Scaffold a new project with similar setup using [generator-nextbone](https://github.com/blikblum/generator-nextbone)
 
 ## Quick start
 
 [Clone](http://git-scm.com/docs/git-clone) or [download](https://github.com/blikblum/marionette.routing/archive/master.zip) this repo.
 
 ```sh
-git clone https://github.com/blikblum/marionette-wires-revisited.git && cd marionette-wires-revisited
+git clone https://github.com/blikblum/nextbone-wires.git && cd nextbone-wires
 ```
 
 Make sure [Node.js](http://nodejs.org/) and [npm](https://www.npmjs.org/) are
@@ -60,15 +56,13 @@ Once that's done, open up dist/index.html in a browser using a static server.
 
 As a general rule, be sure to read through all of the source code yourself and make sure you understand what is happening.
 
-| Directories | Purpose |
-| ---:|:--- |
-| [api](./api) | Mock api routes |
-| [dist](./dist) | Built assets |
-| [src](./src) | Source files |
-| [test](./test) | Test files |
+|    Directories | Purpose         |
+| -------------: | :-------------- |
+|   [api](./api) | Mock api routes |
+| [dist](./dist) | Built assets    |
+|   [src](./src) | Source files    |
+| [test](./test) | Test files      |
 
 ===
 
-&copy; 2014 James Kyle. Distributed under [ISC license](LICENSE.md).
-
-&copy; 2018 Marionette v3/v4 port + new features by Luiz Américo
+&copy; 2019 Luiz Américo Pereira Câmara
