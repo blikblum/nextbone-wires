@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-const CleanPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { WebpackPluginServe } = require('webpack-plugin-serve')
 const argv = require('webpack-nano/argv')
 
@@ -28,7 +28,7 @@ const { mode = 'production' } = argv
 const isProd = mode === 'production'
 
 if (isProd) {
-  plugins.push(new CleanPlugin())
+  plugins.push(new CleanWebpackPlugin())
 } else {
   // dev
   plugins.push(
