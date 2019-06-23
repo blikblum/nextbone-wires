@@ -62,7 +62,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js)$/,
-        include: [path.resolve('src')],
+        include: [path.resolve('src'), /nextbone-contact-manager/],
         use: [
           {
             loader: 'babel-loader',

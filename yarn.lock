@@ -4492,6 +4492,20 @@ neo-async@^2.5.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
   integrity sha512-3KL3fvuRkZ7s4IFOMfztb7zJp3QaVWnBeGoJlgB38XnCRPj/0tLzzLG5IB8NYOHbJ8g8UGrgZv44GLDk6CxTxA==
 
+nextbone-contact-manager@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/nextbone-contact-manager/-/nextbone-contact-manager-0.3.0.tgz#cc7d093ef21637249cc571be7a9a8cc4bb696934"
+  integrity sha512-e7fVX593cOK13zAFNGN4DZyNJZVDSGlppQP7JpodgKu0D3GsPoeBhYMRTMzg9/jv4wxjma4iVykBga9vUTEYwA==
+  dependencies:
+    bootstrap "^4.3.1"
+    jquery "^3.4.1"
+    lit-element "^2.2.0"
+    nextbone "^0.12.0"
+    nextbone-modals "^0.12.0"
+    nextbone-routing "^0.8.0"
+    popper.js "^1.15.0"
+    underscore "^1.8.3"
+
 nextbone-modals@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/nextbone-modals/-/nextbone-modals-0.12.0.tgz#cbca7b4b7cc7a369b5949a4136be549530d11fe5"
@@ -6468,7 +6482,7 @@ underscore@>=1.8.3:
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
   integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
 
-underscore@^1.9.1:
+underscore@^1.8.3, underscore@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
   integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==

@@ -16,6 +16,9 @@ import BooksRoute from './books/route'
 import BooksIndexView from './books/index/book-index-view'
 import BooksShowRoute from './books/show/route'
 
+import { bindLocalStorage } from 'nextbone/localStorage'
+import { Contacts, registerContactsRoute, getContactsSample } from 'nextbone-contact-manager'
+
 import './main.scss'
 
 const app = new Application()
@@ -64,6 +67,12 @@ function ColorsRoute() {
 
 const mainEl = document.querySelector('.application')
 
+const getContacts = () => {
+  const contacts = new Contacts()
+  bindLocalStorage(contacts, 'Contacts', { initialData: getContactsSample })
+  return contacts
+}
+
 router.map(route => {
   route('app', { path: '/', class: ApplicationRoute, component: mainEl, abstract: true }, () => {
     route('index', { path: '', class: IndexRoute })
@@ -78,6 +87,7 @@ router.map(route => {
       route('books.index', { path: '', component: BooksIndexView })
       route('books.show', { path: ':bookid', class: BooksShowRoute })
     })
+    registerContactsRoute(route, getContacts, ModalService)
   })
 })
 
@@ -90,6 +100,12 @@ HeaderService.request('add', {
 HeaderService.request('add', {
   name: 'Books',
   path: 'books',
+  type: 'primary',
+})
+
+HeaderService.request('add', {
+  name: 'Contacts',
+  path: 'contacts',
   type: 'primary',
 })
 
