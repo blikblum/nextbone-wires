@@ -1,9 +1,9 @@
 import _ from 'underscore'
 import { Component, html } from 'component'
-import { routerLinks } from 'nextbone-routing'
+import { withRouterLinks } from 'nextbone-routing'
 import { event, state } from 'nextbone'
 
-@routerLinks
+@withRouterLinks
 class HeaderView extends Component {
   @state
   collection

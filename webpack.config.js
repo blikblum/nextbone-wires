@@ -38,6 +38,7 @@ if (isProd) {
       static: ['.', path.resolve(__dirname, DIST_DIR)],
       liveReload: true,
       hmr: false,
+      open: true,
     }),
   )
 

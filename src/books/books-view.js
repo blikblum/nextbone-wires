@@ -1,7 +1,7 @@
 import { Component, html } from 'component'
-import { Region, routerLinks } from 'nextbone-routing'
+import { Region, withRouterLinks } from 'nextbone-routing'
 
-@routerLinks
+@withRouterLinks
 class BooksView extends Component {
   static outlet = '.books__viewer'
 
