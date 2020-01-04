@@ -14,17 +14,13 @@ export default class extends Route {
     this.model = this.context.colorModel
   }
 
-  deactivate(transition) {
+  deactivate() {
     if (this.el.hasUnsavedChanges(this.model)) {
       return ModalService.confirm({
         title: 'You have unsaved changes',
         text: `Are you sure you want to exit without saving?`,
         yes: 'Yes, discard changes',
         no: 'No, abort exit',
-      }).then(confirmed => {
-        if (!confirmed) {
-          transition.cancel()
-        }
       })
     }
   }

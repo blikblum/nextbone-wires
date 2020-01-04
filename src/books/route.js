@@ -29,8 +29,6 @@ class FlipRegion extends Region {
   }
 }
 
-const outletKey = Symbol('outletKey')
-
 export default class extends Route {
   static component = BooksView
 
@@ -58,11 +56,7 @@ export default class extends Route {
     el.collection = this.collection
   }
 
-  getOutlet() {
-    let result =
-      this.el[outletKey] ||
-      (this.el[outletKey] = new FlipRegion(this.el.querySelector(BooksView.outlet)))
-
-    return result
+  createOutlet(el) {
+    return new FlipRegion(el)
   }
 }
