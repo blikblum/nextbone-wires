@@ -1,7 +1,9 @@
 import _ from 'underscore'
+import $ from 'jquery'
 import { Component, html } from 'component'
 import { withRouterLinks } from 'nextbone-routing'
 import { event, state } from 'nextbone'
+import { Radio } from 'nextbone-radio'
 
 @withRouterLinks
 class HeaderView extends Component {
@@ -21,8 +23,10 @@ class HeaderView extends Component {
 
   @event('show.bs.collapse', '#navbar-collapse')
   onCollapseShow() {
-    this.listenToOnce(history, 'route', () => {
-      this.ui.collapse.collapse('hide')
+    Radio.channel('router').once('transition', () => {
+      $(this)
+        .find('#navbar-collapse')
+        .collapse('hide')
     })
   }
 
