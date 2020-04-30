@@ -20,7 +20,7 @@
   "dependencies": {
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lit-element": "^2.2.1",
     "nextbone": "^0.13.0",
     "nextbone-contact-manager": "^0.4.0",
